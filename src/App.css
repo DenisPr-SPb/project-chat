@@ -1,38 +1,220 @@
-.App {
-  text-align: center;
+.app__wrapper{
+    max-width: 80%;
+    margin: 10px auto;
+    display: grid;
+    grid-template-areas:
+    'header header'
+    'nav profile';
+    grid-template-rows: 60px 1fr;
+    grid-template-columns:2fr 10fr;
+    grid-gap: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*MAIN PAGE ELEMENT*/
+
+.main__wrapper{
+    background: lightblue;
+    grid-area: profile;
+    padding-bottom: 10px;
+    position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/*HEADER*/
+
+.header__wrapper{
+    grid-area: header;
+    background: darkgray;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/*NAVBAR*/
+
+.nav__wrapper{
+    grid-area: nav;
+    background: darkgray;
 }
 
-.App-link {
-  color: #61dafb;
+.nav__link{
+    margin: 10px;
+    text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav__link:hover{
+    border: 1px dotted lightgray;
+    border-radius: 5px;
+}
+
+.nav__link a{
+    color: black;
+    text-decoration: none;
+}
+
+.nav__link a.active{
+    color: white;
+}
+
+/*PROFILE*/
+
+.profile__wrapper{
+}
+
+.img__wrapper{
+    min-width: 100%;
+    height: 40px;
+    background: aqua;
+}
+
+.info__wrapper{
+    max-width: 95%;
+    margin: 10px auto;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
+}
+
+.info__avatar img{
+    -webkit-box-shadow: -5px -5px 19px -5px rgba(34, 60, 80, 0.79) inset;
+    -moz-box-shadow: -5px -5px 19px -5px rgba(34, 60, 80, 0.79) inset;
+    box-shadow: -5px -5px 19px -5px rgba(34, 60, 80, 0.79) inset;
+    border-radius: 5px;
+}
+
+.info__description{
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 2fr 2fr;
+}
+
+/*POST*/
+.posts__wrapper{
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+/*NEWPOST*/
+
+.new__post__wrapper{}
+.text__area__wrapper{}
+.new__post__btn__wrapper{}
+.new__post__btn{}
+
+/*POST*/
+
+.post__item__wrapper {
+    max-width: 95%;
+    margin: 10px auto;
+    display: grid;
+    grid-template-columns: 50px 8fr 1fr;
+}
+
+.post__item__wrapper:last-child{
+    margin-bottom: 0;
+}
+.post__avatar{
+    background: lightgreen;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border:1px dotted black
+}
+.post__text{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.post__setup{}
+.post__likes{}
+
+/*DIALOGS*/
+
+.dialogs__wrapper{
+    margin: 10px;
+}
+.dialog__info{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs__items{
+}
+.dialog__name{
+    margin: 10px;
+}
+
+.dialog__name a {
+    color: black;
+    text-decoration: none;
+}
+
+.dialog__name a.active{
+    color: white;
+}
+.dialog__msg{}
+.msg__item{
+}
+
+.dialog__text__wrapper{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+}
+
+/*USERS*/
+
+.users__wrapper{
+    max-width: 95%;
+    margin: 10px auto;
+}
+.users__list__wrapper{}
+.users__list{}
+.users__list:last-child{
+    margin-bottom: 0;
+}
+.user__item__wrapper{
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+}
+.user__avatar__wrapper{
+    margin-bottom: 10px;
+}
+.user__avatar{}
+
+.user__avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.user__follow__btn button{
+    border-radius: 5px;
+    font-weight: bold;
+    width: 50%;
+}
+
+.follow__btn {
+    background-color: lightgreen;
+}
+.unfollow__btn{
+    background-color: antiquewhite;
+}
+.page__selector{
+    margin-bottom: 10px;
+
+}
+
+.page__selector span {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    text-decoration: underline;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.preloader {
+    position: absolute;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    right: 50%;
+    top: 50%;
 }
