@@ -1,15 +1,15 @@
-import './App.css';
-import {Header} from "./componenst/header/Header";
-import {Navbar} from "./componenst/navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
+import './App.css';
+import {Navbar} from "./componenst/navbar/Navbar";
 import DialogsContainer from "./componenst/dialogs/DialogsContainer";
 import UsersContainer from "./componenst/users/UsersContainer";
 import ProfileContainer from "./componenst/profile/ProfileContainer";
+import HeaderContainer from "./componenst/header/HeaderContainer";
 
 export default function App() {
     return (
         <div className="app__wrapper">
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className="main__wrapper">
                 <Routes>
