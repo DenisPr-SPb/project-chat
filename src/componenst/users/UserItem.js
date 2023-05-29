@@ -7,30 +7,31 @@ export default function UserItem({
                                      follow,
                                      unfollow,
                                      followingInProgress,
-                                     toggleFollowingProgress }) {
+                                     toggleFollowingProgress
+                                 }) {
 
     function FollowBtn({followed}) {
         if (followed) {
-            return <button disabled={followingInProgress} onClick={() => {
-                toggleFollowingProgress(true)
+            return <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+                toggleFollowingProgress(true, user.id)
                 usersAPI.setUnfollow(user.id)
                     .then(res => {
                         if (res.data.resultCode === 0) {
                             unfollow(user.id)
                         }
-                        toggleFollowingProgress(false)
+                        toggleFollowingProgress(false, user.id)
                     })
 
             }} className="unfollow__btn">unfollow</button>
         }
-        return <button disabled={followingInProgress} onClick={() => {
-            toggleFollowingProgress(true)
+        return <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+            toggleFollowingProgress(true, user.id)
             usersAPI.setFollow(user.id)
                 .then(res => {
                     if (res.data.resultCode === 0) {
                         follow(user.id)
                     }
-                    toggleFollowingProgress(false)
+                    toggleFollowingProgress(false, user.id)
                 })
 
         }} className="follow__btn">follow</button>

@@ -1,16 +1,17 @@
 import UserItem from "./UserItem";
 import React from "react";
 
-export default function Users ({
-                                   totalUsersCount,
-                                   pageSize,
-                                   currentPage,
-                                   onPageChanged,
-                                   users,
-                                   follow,
-                                   unfollow,
-                                   followingInProgress,
-                                   toggleFollowingProgress}) {
+export default function Users({
+                                  totalUsersCount,
+                                  pageSize,
+                                  currentPage,
+                                  onPageChanged,
+                                  users,
+                                  follow,
+                                  unfollow,
+                                  followingInProgress,
+                                  toggleFollowingProgress
+                              }) {
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -22,7 +23,9 @@ export default function Users ({
             <div className='page__selector'>
                 {pages.map(p => {
                     return <span key={p} className={currentPage === p ? 'selectedPage' : ''}
-                                 onClick={() => { onPageChanged(p) }}>{p}</span>
+                                 onClick={() => {
+                                     onPageChanged(p)
+                                 }}>{p}</span>
                 })}
             </div>
             <div className="users__list__wrapper">

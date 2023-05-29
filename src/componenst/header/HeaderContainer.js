@@ -4,7 +4,7 @@ import {Header} from "./Header";
 import {setAuthUserData} from "../../state/auth-reducer";
 import {loginAPI} from "../../api/api";
 
-class HeaderContainer extends React.Component{
+class HeaderContainer extends React.Component {
 
     componentDidMount() {
         loginAPI.setAuth().then(data => {
@@ -16,9 +16,9 @@ class HeaderContainer extends React.Component{
     }
 
     render() {
-       return (
-           <Header props={this.props}/>
-       )
+        return (
+            <Header props={this.props}/>
+        )
     }
 }
 

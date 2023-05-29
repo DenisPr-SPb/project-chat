@@ -11,7 +11,7 @@ class ProfileContainer extends React.Component {
         let userId = this.props.router.params.userId
 
         if (!userId) {
-            userId = 2
+            userId = 28980
         }
         profileAPI.setUser(userId)
             .then(res => {
@@ -21,11 +21,9 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-           <Profile props={this.props} profile={this.props.profile}/>
+            <Profile props={this.props} profile={this.props.profile}/>
         )
     }
-
-
 }
 
 function mapStateToProps(state) {
@@ -42,7 +40,7 @@ function withRouter(Component) {
         return (
             <Component
                 {...props}
-                router={{ location, navigate, params }}
+                router={{location, navigate, params}}
             />
         );
     }
