@@ -10,7 +10,6 @@ export default function Users({
                                   follow,
                                   unfollow,
                                   followingInProgress,
-                                  toggleFollowingProgress
                               }) {
     const pagesCount = Math.ceil(totalUsersCount / pageSize)
     const pages = []
@@ -31,11 +30,11 @@ export default function Users({
             <div className="users__list__wrapper">
                 <div className="users__list">
                     {users.map(user => <UserItem
-                        key={user.id} user={user}
+                        key={user.id}
+                        user={user}
                         follow={follow}
                         unfollow={unfollow}
-                        followingInProgress={followingInProgress}
-                        toggleFollowingProgress={toggleFollowingProgress}/>)}
+                        followingInProgress={followingInProgress}/>)}
                 </div>
             </div>
             <div className="users__btn__wrapper">some btn</div>

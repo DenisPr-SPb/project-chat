@@ -4,7 +4,7 @@ import MyPostsContainer from "./myposts/MyPostsContainer";
 export function Profile({props, profile}) {
     return (
         <div className='profile__wrapper'>
-            <div className='img__wrapper'>
+            <div className='profile__img__wrapper'>
             </div>
             <ProfileInfo profile={profile}/>
             <MyPostsContainer/>

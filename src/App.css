@@ -81,10 +81,17 @@
 .profile__wrapper{
 }
 
-.img__wrapper{
+.profile__img__wrapper{
     min-width: 100%;
-    height: 40px;
-    background: aqua;
+    height: 180px;
+    background-image: url("./assets/header/header-logo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.profile__img__wrapper img {
+
 }
 
 .info__wrapper{

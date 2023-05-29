@@ -1,38 +1,22 @@
 import userPhoto from '../../assets/images/ava.jpg'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 export default function UserItem({
                                      user,
                                      follow,
                                      unfollow,
                                      followingInProgress,
-                                     toggleFollowingProgress
                                  }) {
 
     function FollowBtn({followed}) {
         if (followed) {
             return <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-                toggleFollowingProgress(true, user.id)
-                usersAPI.setUnfollow(user.id)
-                    .then(res => {
-                        if (res.data.resultCode === 0) {
-                            unfollow(user.id)
-                        }
-                        toggleFollowingProgress(false, user.id)
-                    })
+                unfollow(user.id)
 
             }} className="unfollow__btn">unfollow</button>
         }
         return <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-            toggleFollowingProgress(true, user.id)
-            usersAPI.setFollow(user.id)
-                .then(res => {
-                    if (res.data.resultCode === 0) {
-                        follow(user.id)
-                    }
-                    toggleFollowingProgress(false, user.id)
-                })
+            follow(user.id)
 
         }} className="follow__btn">follow</button>
     }
