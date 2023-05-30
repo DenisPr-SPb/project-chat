@@ -1,4 +1,5 @@
 import Preloader from "../../common/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 export function ProfileInfo({profile}){
     if (!profile) {
@@ -10,6 +11,7 @@ export function ProfileInfo({profile}){
             <div className="info__avatar">
                 <img src={profile.photos.small} alt=""/>
             </div>
+            <ProfileStatus status={'Hello my friends'}/>
             <div className="info__description">
                 <div className="info__name">{profile.fullName}</div>
                 <div className="info__about">{profile.aboutMe}</div>

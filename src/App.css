@@ -98,7 +98,7 @@
     max-width: 95%;
     margin: 10px auto;
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 3fr 8fr;
 
 }
 
