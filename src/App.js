@@ -5,6 +5,7 @@ import DialogsContainer from "./componenst/dialogs/DialogsContainer";
 import UsersContainer from "./componenst/users/UsersContainer";
 import ProfileContainer from "./componenst/profile/ProfileContainer";
 import HeaderContainer from "./componenst/header/HeaderContainer";
+import LoginContainer from "./componenst/login/LoginContainer";
 
 export default function App() {
     return (
@@ -14,13 +15,13 @@ export default function App() {
             <div className="main__wrapper">
                 <Routes>
                     <Route path='/profile/:userId?'
-                           Component={() => <ProfileContainer/>}
-                    />
+                           Component={() => <ProfileContainer/>}/>
                     <Route path='/dialogs'
-                           Component={() => <DialogsContainer/>
-                           }/>
+                           Component={() => <DialogsContainer/>}/>
                     <Route path='/users'
                            Component={() => <UsersContainer/>}/>
+                    <Route path='/login'
+                           Component={() => <LoginContainer/>}/>
                 </Routes>
 
             </div>

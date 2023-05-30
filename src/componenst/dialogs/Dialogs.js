@@ -1,7 +1,12 @@
 import {DialogItem} from "./DialogItem";
+import {Navigate} from "react-router-dom";
 
-export function Dialogs({sendMessage, updateNewMessageText, dialogsPage}) {
+export function Dialogs({sendMessage, updateNewMessageText, dialogsPage, isAuth}) {
     const newMsgText = dialogsPage.newMsgText
+
+    if (!isAuth) {
+        return <Navigate to={'/login'}/>
+    }
     function addNewMsg () {
         sendMessage()
     }
