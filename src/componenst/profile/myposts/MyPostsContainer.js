@@ -1,12 +1,21 @@
+import React from "react";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../state/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 
 
-/**
- * @param {Object} state
- * @returns {Object}
- */
+class MyPostContainer extends React.Component {
+    render() {
+        return (
+            <MyPosts
+                addPost={this.props.addPost}
+                newPostText={this.props.newPostText}
+                postsData={this.props.postsData}
+                updateNewPostText={this.props.updateNewPostText}/>
+        )
+    }
+}
+
 function mapStateToProps(state) {
     return {
         newPostText: state.profilePage.newPostText,
@@ -14,11 +23,6 @@ function mapStateToProps(state) {
     }
 }
 
-
-/**
- * @param {Function} dispatch
- * @returns {Object}
- */
 function mapDispatchToProps(dispatch) {
     return {
         updateNewPostText: (text) => {
@@ -30,6 +34,6 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPostContainer)
 
 export default MyPostsContainer

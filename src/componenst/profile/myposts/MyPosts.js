@@ -1,5 +1,6 @@
 import {Post} from "./posts/Post";
 import React from "react";
+import {Field, Form, Formik} from "formik";
 
 
 
@@ -17,24 +18,47 @@ export function MyPosts({ postsData, updateNewPostText, addPost, newPostText }) 
 
     return (
         <div className="posts__wrapper">
-            <div>My post</div>
+            <div>
+                <h3>My post</h3>
+            </div>
             <div className="post__wrapper">
                 <div className="new__post__wrapper">
-                    <div className="text__area__wrapper">
-                        <textarea name="" id="" cols="30" rows="1"
-                                  ref={newPostEl}
-                                  onChange={onPostChange}
-                                  value={newPostText}/>
-                    </div>
-                    <div className="new__post__btn__wrapper">
-                        <button className="new__post__btn" onClick={ onAddNewPost }>Add post</button>
-                    </div>
+                    <AddPostForm updateNewPostText={updateNewPostText} addPost={addPost}/>
                 </div>
-
                 <div>
                     {postsData.map(el => <Post key={el.id} post={el.post} like={el.likes} id={el.id}/>)}
                 </div>
             </div>
         </div>
+    )
+}
+
+function AddPostForm ({updateNewPostText, addPost}) {
+    const addNewPost = (values) => {
+        updateNewPostText( values )
+        addPost()
+    }
+
+    return (
+        <Formik
+            initialValues={{ newPostBody: "" }}
+            onSubmit={(values, {resetForm}) => {
+                addNewPost( values.newPostBody )
+                resetForm( {values: ''} )}}>
+            {() => (
+                <Form>
+                    <div className="">
+                        <Field
+                            name={'newPostBody'}
+                            as={'textarea'}
+                            placeholder={'enter text'}/>
+                    </div>
+
+                    <div className="">
+                        <button type={'submit'}>Send</button>
+                    </div>
+                </Form>
+            )}
+        </Formik>
     )
 }

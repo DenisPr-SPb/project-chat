@@ -184,8 +184,6 @@
 
 .dialog__text__wrapper{
     margin-top: 10px;
-    display: grid;
-    grid-template-columns: 10fr 2fr;
 }
 
 /*USERS*/
