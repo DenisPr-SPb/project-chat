@@ -1,24 +1,30 @@
+import React from "react";
 import {sendMessageCreator, updateNewMessageTextCreator} from "../../state/dialog-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../hocs/withAuthRedirect";
 import {compose} from "redux";
 
-/**
- * @param {Object} state
- * @returns {Object}
- */
+
+class DialogsContainer extends React.Component {
+    render() {
+        return (
+            <Dialogs
+                updateNewMessageText={this.props.updateNewMessageText}
+                sendMessage={this.props.sendMessage}
+                dialogsPage={this.props.dialogsPage}
+                isAuth={this.props.isAuth}
+            />
+        )
+    }
+}
+
 function mapStateToProps (state) {
     return {
         dialogsPage: state.dialogPage,
     }
 }
 
-
-/**
- * @param {Function} dispatch
- * @returns {Object}
- */
 function mapDispatchToProps (dispatch) {
     return {
         updateNewMessageText: (text) => {
@@ -33,4 +39,4 @@ function mapDispatchToProps (dispatch) {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
-)(Dialogs)
+)(DialogsContainer)
