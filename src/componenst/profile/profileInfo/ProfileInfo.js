@@ -1,7 +1,8 @@
 import Preloader from "../../common/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import avaPlug from "../../../assets/images/ava.jpg"
 
-export function ProfileInfo({profile}){
+export function ProfileInfo({profile, status, updateStatus}){
     if (!profile) {
         return <Preloader/>
     }
@@ -9,9 +10,9 @@ export function ProfileInfo({profile}){
     return (
         <div className="info__wrapper">
             <div className="info__avatar">
-                <img src={profile.photos.small} alt=""/>
+                <img src={profile.photos.small ? profile.photos.small : avaPlug} alt=""/>
             </div>
-            <ProfileStatus status={'Hello my friends'}/>
+            <ProfileStatus status={status} updateStatus={updateStatus}/>
             <div className="info__description">
                 <div className="info__name">{profile.fullName}</div>
                 <div className="info__about">{profile.aboutMe}</div>
