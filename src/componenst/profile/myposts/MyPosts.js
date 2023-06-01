@@ -4,17 +4,7 @@ import {Field, Form, Formik} from "formik";
 
 
 
-export function MyPosts({ postsData, updateNewPostText, addPost, newPostText }) {
-    const newPostEl = React.createRef()
-
-    function onAddNewPost () {
-        addPost()
-    }
-
-    function onPostChange () {
-        const text = newPostEl.current.value
-        updateNewPostText(text)
-    }
+export function MyPosts({ postsData, updateNewPostText, addPost }) {
 
     return (
         <div className="posts__wrapper">
