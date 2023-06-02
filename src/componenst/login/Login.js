@@ -2,14 +2,13 @@ import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import loginFormSchema from "../formValidation/LoginFormSchema";
 
-export default function Login () {
+export default function Login ({login, isAuth}) {
 
     const initialValues = {
-        name: '',
+        email: '',
         password: '',
         rememberMe: false
     }
-
 
     return (
         <div className="login__wrapper">
@@ -20,19 +19,20 @@ export default function Login () {
                 <Formik initialValues={initialValues}
                         validate={values => {
                             const errors = {};
-                            if (!values.name) {
-                                errors.name = 'Required';
+                            if (!values.email) {
+                                errors.email = 'Required';
                             }
                             return errors;
                         }}
                         onSubmit={(values) => {
-                            console.log(values)
+                            const {email, password, rememberMe} = values
+                            login(email, password, rememberMe)
                         }}
                         validationSchema={loginFormSchema}>
                     {() => (
                         <Form className="form__wrapper">
                             <div className="form__item">
-                                <Field type={'text'} name={'name'} placeholder={'name'}/>
+                                <Field type={'text'} name={'email'} placeholder={'email'}/>
                             </div>
                             <ErrorMessage name="email" component="div"/>
 

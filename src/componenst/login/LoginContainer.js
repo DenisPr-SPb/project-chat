@@ -1,23 +1,22 @@
 import React from "react";
 import Login from "./Login";
 import {connect} from "react-redux";
+import {login} from "../../state/auth-reducer";
+import {compose} from "redux";
 
 
 class LoginContainer extends React.Component {
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
-            <Login/>
+            <Login login={this.props.login} logout={this.props.logout} isAuth={this.props.isAuth}/>
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -40,4 +39,6 @@ function mapStateToProps(state) {
 // const WithURLDataContainerComponent = withRouter(ProfileContainer)
 
 
-export default connect(mapStateToProps, {})(LoginContainer)
+export default compose(
+    connect(mapStateToProps, {login})
+)(LoginContainer)

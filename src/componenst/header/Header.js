@@ -9,7 +9,7 @@ export function Header({props}) {
                 <div className="header__logo__name">Peace Among World!</div>
             </div>
             <div className="header__login__wrapper">
-                {props.isAuth ? props.login : <NavLink to='/login'>Login</NavLink>}
+                {props.isAuth ? <div>{props.login} - <button onClick={props.logout}>LOGOUT</button></div> : <NavLink to='/login'>Login</NavLink>}
             </div>
         </header>
     )
