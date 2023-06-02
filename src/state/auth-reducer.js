@@ -1,12 +1,14 @@
 import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET-USER-DATA'
+const ERROR_MESSAGE = 'ERROR-MESSAGE'
 
 const initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    error: ''
 }
 
 export default function authReducer(state = initialState, action) {
@@ -14,7 +16,13 @@ export default function authReducer(state = initialState, action) {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.payload
+                ...action.payload,
+                error: ''
+            }
+        case ERROR_MESSAGE:
+            return  {
+                ...state,
+                error: action.error
             }
         default:
             return state
@@ -23,6 +31,10 @@ export default function authReducer(state = initialState, action) {
 
 export function setAuthUserData(userId, email, login, isAuth) {
     return {type: SET_USER_DATA, payload: {userId, email, login, isAuth}}
+}
+
+export function receivedErrMessage (error) {
+    return {type: ERROR_MESSAGE, error}
 }
 
 // THUNK
@@ -45,6 +57,8 @@ export function login (email, password, rememberMe) {
             .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(getAuthUserData())
+                } else {
+                    dispatch(receivedErrMessage(res.data.messages[0]))
                 }
             } )
     }

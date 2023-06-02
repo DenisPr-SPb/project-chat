@@ -9,14 +9,19 @@ class LoginContainer extends React.Component {
 
     render() {
         return (
-            <Login login={this.props.login} logout={this.props.logout} isAuth={this.props.isAuth}/>
+            <Login
+                login={this.props.login}
+                isAuth={this.props.isAuth}
+                error={this.props.error}
+            />
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        error: state.auth.error
     }
 }
 

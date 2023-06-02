@@ -1,13 +1,18 @@
 import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import loginFormSchema from "../formValidation/LoginFormSchema";
+import {NavLink} from "react-router-dom";
 
-export default function Login ({login, isAuth}) {
+export default function Login ({login, isAuth, error}) {
 
     const initialValues = {
         email: '',
         password: '',
         rememberMe: false
+    }
+
+    if (isAuth) {
+        return <NavLink to='/profile'>Profile</NavLink>
     }
 
     return (
@@ -48,6 +53,7 @@ export default function Login ({login, isAuth}) {
 
                             <div className="form__item">
                                 <button type={'submit'}>Log in</button>
+                                {error && <div style={{color: 'red'}}>{error}</div>}
                             </div>
                         </Form>
                     )}
