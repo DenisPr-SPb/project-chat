@@ -41,8 +41,7 @@ export function receivedErrMessage (error) {
 
 export function getAuthUserData () {
     return (dispatch) => {
-        authAPI.authMe()
-            .then(data => {
+        return authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 const {id, email, login} = data.data
                 dispatch(setAuthUserData(id, email, login, true))
