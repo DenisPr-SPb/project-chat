@@ -100,14 +100,14 @@ export function toggleFollowingProgress(isFetching, userId) {
 
 // THUNK - запросы
 
-export function getUsers(currentPage, pageSize) {
+export function requestUsers(requestedPage, pageSize) {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
 
-        usersAPI.getUsers(currentPage, pageSize)
+        usersAPI.getUsers(requestedPage, pageSize)
             .then(data => {
                     dispatch(toggleIsFetching(false))
-                    dispatch(setCurrentPage(currentPage))
+                    dispatch(setCurrentPage(requestedPage))
                     dispatch(setUsers(data.items))
                     dispatch(setTotalUsersCount(200)) // (response.data.totalCount - для всего списка)
                 }

@@ -23,7 +23,6 @@ export function initializedSuccess() { return {type: INITIALIZED_SUCCESS}}
 export function initializeApp() {
     return (dispatch) => {
         const authUserPromise = dispatch(getAuthUserData())
-        console.log('#DEBUG PROMISE', authUserPromise);
         Promise.all([authUserPromise]).then(() => {
             dispatch(initializedSuccess())
         })
