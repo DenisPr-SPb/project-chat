@@ -12,7 +12,7 @@ class ProfileContainer extends React.Component {
         let userId = this.props.router.params.userId
 
         if (!userId) {
-            userId = 8336
+            userId = this.props.loggedUserId
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -32,7 +32,8 @@ class ProfileContainer extends React.Component {
 function mapStateToProps(state) {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        loggedUserId: state.auth.userId
     }
 }
 
