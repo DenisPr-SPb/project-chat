@@ -4,14 +4,12 @@ import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 
 
-class MyPostContainer extends React.Component {
-    render() {
-        return (
-            <MyPosts
-                props={this.props}
-            />
-        )
-    }
+function MyPostContainer(props) {
+    return (
+        <MyPosts
+            props={props}
+        />
+    )
 }
 
 function mapStateToProps(state) {
@@ -32,4 +30,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPostContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(MyPostContainer))

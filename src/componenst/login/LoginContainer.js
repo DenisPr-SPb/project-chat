@@ -25,25 +25,6 @@ function mapStateToProps(state) {
     }
 }
 
-// function withRouter(Component) {
-//     function ComponentWithRouterProp(props) {
-//         let location = useLocation()
-//         let navigate = useNavigate()
-//         let params = useParams()
-//         return (
-//             <Component
-//                 {...props}
-//                 router={{location, navigate, params}}
-//             />
-//         );
-//     }
-//
-//     return ComponentWithRouterProp
-// }
-//
-// const WithURLDataContainerComponent = withRouter(ProfileContainer)
-
-
 export default compose(
     connect(mapStateToProps, {login})
 )(LoginContainer)
