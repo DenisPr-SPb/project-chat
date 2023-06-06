@@ -4,7 +4,7 @@ import {Field, Form, Formik} from "formik";
 
 
 
-export function MyPosts({ postsData, updateNewPostText, addPost }) {
+export function MyPosts({ props }) {
 
     return (
         <div className="posts__wrapper">
@@ -13,10 +13,10 @@ export function MyPosts({ postsData, updateNewPostText, addPost }) {
             </div>
             <div className="post__wrapper">
                 <div className="new__post__wrapper">
-                    <AddPostForm updateNewPostText={updateNewPostText} addPost={addPost}/>
+                    <AddPostForm updateNewPostText={props.updateNewPostText} addPost={props.addPost}/>
                 </div>
                 <div>
-                    {postsData.map(el => <Post key={el.id} post={el.post} like={el.likes} id={el.id}/>)}
+                    {props.postsData.map(el => <Post key={el.id} post={el.post} like={el.likes} id={el.id}/>)}
                 </div>
             </div>
         </div>

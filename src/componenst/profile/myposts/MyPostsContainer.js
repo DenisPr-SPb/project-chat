@@ -8,10 +8,8 @@ class MyPostContainer extends React.Component {
     render() {
         return (
             <MyPosts
-                addPost={this.props.addPost}
-                newPostText={this.props.newPostText}
-                postsData={this.props.postsData}
-                updateNewPostText={this.props.updateNewPostText}/>
+                props={this.props}
+            />
         )
     }
 }

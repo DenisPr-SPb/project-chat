@@ -2,8 +2,8 @@ import {DialogItem} from "./DialogItem";
 import {Navigate} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 
-export function Dialogs({sendMessage, updateNewMessageText, dialogsPage, isAuth}) {
-    if (!isAuth) {
+export function Dialogs({ props }) {
+    if (!props.isAuth) {
         return <Navigate to={'/login'}/>
     }
 
@@ -11,14 +11,14 @@ export function Dialogs({sendMessage, updateNewMessageText, dialogsPage, isAuth}
         <div className="dialogs__wrapper">
             <div className="dialog__info">
                 <div className="dialogs__items">
-                    {dialogsPage.companions.map(companion => <DialogItem key={companion.id} name={companion.name} pathId={companion.id}/>)}
+                    {props.dialogsPage.companions.map(companion => <DialogItem key={companion.id} name={companion.name} pathId={companion.id}/>)}
                 </div>
                 <div className="dialog__msg">
-                    {dialogsPage.messages.map(msg => <div className="msg__item" key={msg.id}>{msg.message}</div>)}
+                    {props.dialogsPage.messages.map(msg => <div className="msg__item" key={msg.id}>{msg.message}</div>)}
                 </div>
             </div>
             <div className="dialog__text__wrapper">
-                <AddMessageForm sendMessage={sendMessage} updateNewMessageText={updateNewMessageText}/>
+                <AddMessageForm sendMessage={props.sendMessage} updateNewMessageText={props.updateNewMessageText}/>
             </div>
         </div>
     )

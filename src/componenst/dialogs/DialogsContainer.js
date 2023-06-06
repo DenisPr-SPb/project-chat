@@ -10,10 +10,7 @@ class DialogsContainer extends React.Component {
     render() {
         return (
             <Dialogs
-                updateNewMessageText={this.props.updateNewMessageText}
-                sendMessage={this.props.sendMessage}
-                dialogsPage={this.props.dialogsPage}
-                isAuth={this.props.isAuth}
+                props={this.props}
             />
         )
     }
