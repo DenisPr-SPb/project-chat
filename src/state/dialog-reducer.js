@@ -1,5 +1,5 @@
-const SEND_MESSAGE = 'SEND-MESSAGE'
-const UPDATE_NEW_MSG_TEXT = 'UPDATE-NEW-MSG-TEXT'
+const SEND_MESSAGE = '/dialog/SEND-MESSAGE'
+const UPDATE_NEW_MSG_TEXT = '/dialog/UPDATE-NEW-MSG-TEXT'
 
 const initialState = {
     companions: [

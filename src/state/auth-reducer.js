@@ -1,7 +1,7 @@
 import {authAPI} from "../api/api";
 
-const SET_USER_DATA = 'chat-network/auth/SET-USER-DATA'
-const ERROR_MESSAGE = 'chat-network/auth/ERROR-MESSAGE'
+const SET_USER_DATA = '/auth/SET-USER-DATA'
+const ERROR_MESSAGE = '/auth/ERROR-MESSAGE'
 
 const initialState = {
     userId: null,
