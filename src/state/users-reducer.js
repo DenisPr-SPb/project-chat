@@ -105,7 +105,7 @@ export function requestUsers(requestedPage, pageSize) {
         dispatch(toggleIsFetching(false))
         dispatch(setCurrentPage(requestedPage))
         dispatch(setUsers(res.items))
-        dispatch(setTotalUsersCount(200)) // (response.data.totalCount - для всего списка)
+        dispatch(setTotalUsersCount(res.totalCount))
     }
 }
 

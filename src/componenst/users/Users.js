@@ -16,7 +16,7 @@ export default function Users({
     return (
         <div className='users__wrapper'>
 
-            <Paginator pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} totalUsersCount={totalUsersCount}/>
+            <Paginator pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} totalItemsCount={totalUsersCount}/>
 
             <div className="users__list__wrapper">
 
@@ -29,7 +29,6 @@ export default function Users({
                         followingInProgress={followingInProgress}/>)}
                 </div>
             </div>
-            <div className="users__btn__wrapper">some btn</div>
         </div>
     )
 }

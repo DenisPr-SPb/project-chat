@@ -1,6 +1,7 @@
 import {DialogItem} from "./DialogItem";
 import {Navigate} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
+import RoundedButton from "../common/buttons/rounded-btn/RoundedButton";
 
 export function Dialogs({ props }) {
     if (!props.isAuth) {
@@ -43,10 +44,10 @@ function AddMessageForm({updateNewMessageText, sendMessage}) {
                             name={'newMessageBody'}
                             as={'textarea'}
                             placeholder={'enter text'}/>
-                    </div>
 
-                    <div className="new__dialog__btn__wrapper">
-                        <button type={'submit'}>Send</button>
+                        <div className="new__dialog__btn__wrapper">
+                            <RoundedButton logo={'Send'} type={'submit'}/>
+                        </div>
                     </div>
                 </Form>
             )}

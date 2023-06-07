@@ -1,5 +1,6 @@
 import userPhoto from '../../assets/images/ava.jpg'
 import {NavLink} from "react-router-dom";
+import RoundedButton from "../common/buttons/rounded-btn/RoundedButton";
 
 export default function UserItem({
                                      user,
@@ -10,15 +11,9 @@ export default function UserItem({
 
     function FollowBtn({followed}) {
         if (followed) {
-            return <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-                unfollow(user.id)
-
-            }} className="unfollow__btn">unfollow</button>
+            return <RoundedButton logo={'unfollow'} disabled={followingInProgress.some(id => id === user.id)} action={() => { unfollow(user.id) }} className="unfollow__btn"/>
         }
-        return <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-            follow(user.id)
-
-        }} className="follow__btn">follow</button>
+        return <RoundedButton logo={'follow'} disabled={followingInProgress.some(id => id === user.id)} action={() => { follow(user.id) }} className="follow__btn"/>
     }
 
     return (

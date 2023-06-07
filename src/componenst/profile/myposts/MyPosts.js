@@ -1,6 +1,7 @@
 import {Post} from "./posts/Post";
 import React from "react";
 import {Field, Form, Formik} from "formik";
+import RoundedButton from "../../common/buttons/rounded-btn/RoundedButton";
 
 
 
@@ -45,7 +46,7 @@ function AddPostForm ({updateNewPostText, addPost}) {
                     </div>
 
                     <div className="">
-                        <button type={'submit'}>Send</button>
+                        <RoundedButton logo={'Send'} type={'submit'}/>
                     </div>
                 </Form>
             )}

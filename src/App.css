@@ -212,12 +212,6 @@
     border-radius: 50%;
 }
 
-.user__follow__btn button{
-    border-radius: 5px;
-    font-weight: bold;
-    width: 50%;
-}
-
 .follow__btn {
     background-color: lightgreen;
 }
