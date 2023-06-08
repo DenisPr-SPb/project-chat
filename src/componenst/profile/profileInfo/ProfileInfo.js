@@ -2,15 +2,22 @@ import Preloader from "../../common/Preloader";
 import avaPlug from "../../../assets/images/ava.jpg"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-export function ProfileInfo({props}){
+export function ProfileInfo({props, isOwner, savePhoto}){
     if (!props.profile) {
         return <Preloader/>
+    }
+
+    function onAvatarPhotoSelected(e) {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
     }
 
     return (
         <div className="info__wrapper">
             <div className="info__avatar">
                 <img src={props.profile.photos.small ? props.profile.photos.small : avaPlug} alt=""/>
+                { isOwner && <input type={'file'} onChange={onAvatarPhotoSelected}/> }
             </div>
             <ProfileStatusWithHooks props={props}/>
             <div className="info__description">
