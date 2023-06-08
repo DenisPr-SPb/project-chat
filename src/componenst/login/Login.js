@@ -2,6 +2,7 @@ import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import loginFormSchema from "../formValidation/LoginFormSchema";
 import {NavLink} from "react-router-dom";
+import RoundedButton from "../common/buttons/rounded-btn/RoundedButton";
 
 export default function Login ({login, isAuth, error}) {
 
@@ -52,7 +53,7 @@ export default function Login ({login, isAuth, error}) {
                             </div>
 
                             <div className="form__item">
-                                <button type={'submit'}>Log in</button>
+                                <RoundedButton logo={'Log in'} type={'submit'}/>
                                 {error && <div style={{color: 'red'}}>{error}</div>}
                             </div>
                         </Form>

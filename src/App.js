@@ -8,9 +8,9 @@ import {compose} from "redux";
 import {initializeApp} from "./state/app-reducer";
 import Preloader from "./componenst/common/Preloader";
 
-const LoginContainer = lazy(() => import("./componenst/login/LoginContainer"))
-const UsersContainer = lazy(() => import("./componenst/users/UsersContainer"))
-const ProfileContainer = lazy (() => import ("./componenst/profile/ProfileContainer"))
+const LoginContainer = lazy(() => import ("./componenst/login/LoginContainer"))
+const UsersContainer = lazy(() => import ("./componenst/users/UsersContainer"))
+const ProfileContainer = lazy(() => import ("./componenst/profile/ProfileContainer"))
 const DialogsContainer = lazy(() => import ("./componenst/dialogs/DialogsContainer"))
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
         return (
             <div className="app__wrapper">
@@ -25,12 +26,12 @@ class App extends Component {
                 <Navbar/>
                 <div className="main__wrapper">
                     <Suspense fallback={<Preloader/>}>
-                            <Routes>
-                                <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
-                                <Route path='/dialogs' element={<DialogsContainer/>}/>
-                                <Route path='/users' element={<UsersContainer/>}/>
-                                <Route path='/login' element={<LoginContainer/>}/>
-                            </Routes>
+                        <Routes>
+                            <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
+                            <Route path='/dialogs' element={<DialogsContainer/>}/>
+                            <Route path='/users' element={<UsersContainer/>}/>
+                            <Route path='/login' element={<LoginContainer/>}/>
+                        </Routes>
                     </Suspense>
                 </div>
             </div>
@@ -38,7 +39,7 @@ class App extends Component {
     }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
         initialized: state.app.initialized
     }
