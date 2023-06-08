@@ -24,7 +24,8 @@ export default function ProfileStatusWithHooks({props}) {
 
     return (
         <div className="profile__status__wrapper">
-            <div className="profile__status">
+            <div className="profile__status" style={{display:"flex"}}>
+                <div>Status: </div>
                 {!editMode &&
                     <div onClick={activateEditMode} className="status__text">
                         {status || '----'}
