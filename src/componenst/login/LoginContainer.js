@@ -13,6 +13,7 @@ class LoginContainer extends React.Component {
                 login={this.props.login}
                 isAuth={this.props.isAuth}
                 error={this.props.error}
+                captchaUrl={this.props.captchaUrl}
             />
         )
     }
@@ -20,6 +21,7 @@ class LoginContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        captchaUrl: state.auth.captcha,
         isAuth: state.auth.isAuth,
         error: state.auth.error
     }

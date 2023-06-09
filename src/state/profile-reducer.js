@@ -6,7 +6,6 @@ const SET_USER_PROFILE ='/profile/SET-USER-PROFILE'
 const SET_STATUS = '/profile/SET-STATUS'
 const DELETE_POST = '/profile/DELETE-POST'
 const SAVE_PHOTO_SUCCESS = '/profile/SAVE-PHOTO-SUCCESS'
-const ADD_PROFILE_DATA= '/profile/ADD-PROFILE-DATA'
 
 const initialState = {
     posts: [
@@ -117,7 +116,6 @@ export function savePhoto(file) {
 export function saveProfileData(profile) {
     return async (dispatch, getState) => {
         const res = await profileAPI.saveProfileData(profile)
-        console.log('res', res)
         if (res.data.resultCode === 0) {
             dispatch(getUserProfile(getState().auth.userId))
         }

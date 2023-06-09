@@ -1,19 +1,21 @@
 import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import loginFormSchema from "../formValidation/LoginFormSchema";
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import RoundedButton from "../common/buttons/rounded-btn/RoundedButton";
 
-export default function Login ({login, isAuth, error}) {
-
+export default function Login ({login, isAuth, error, captchaUrl}) {
+    const navigate = useNavigate()
     const initialValues = {
         email: '',
         password: '',
-        rememberMe: false
+        rememberMe: false,
+        captchaInput: ''
     }
 
     if (isAuth) {
-        return <NavLink to='/profile'>Profile</NavLink>
+        setTimeout(() => navigate('/profile'));
+        return <></>;
     }
 
     return (
@@ -31,8 +33,8 @@ export default function Login ({login, isAuth, error}) {
                             return errors;
                         }}
                         onSubmit={(values) => {
-                            const {email, password, rememberMe} = values
-                            login(email, password, rememberMe)
+                            const {email, password, rememberMe, captchaInput} = values
+                            login(email, password, rememberMe, captchaInput)
                         }}
                         validationSchema={loginFormSchema}>
                     {() => (
@@ -56,6 +58,12 @@ export default function Login ({login, isAuth, error}) {
                                 <RoundedButton logo={'Log in'} type={'submit'}/>
                                 {error && <div style={{color: 'red'}}>{error}</div>}
                             </div>
+
+                            {captchaUrl && <img src={captchaUrl} alt={'captcha'}/>}
+                            {captchaUrl && <div className="form__item">
+                                <Field type={'text'} name={'captchaInput'} placeholder={'enter symbols from the picture'}/>
+                                <RoundedButton logo={'Submit'} type={'submit'}/>
+                            </div>}
                         </Form>
                     )}
                 </Formik>
