@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.css": "/project-chat/static/css/main.9af0e156.css",
-    "main.js": "/project-chat/static/js/main.774bf697.js",
+    "main.css": "/project-chat/static/css/main.b8e84af3.css",
+    "main.js": "/project-chat/static/js/main.6ec6d6d4.js",
     "static/js/427.d62bea5c.chunk.js": "/project-chat/static/js/427.d62bea5c.chunk.js",
     "static/js/621.8b907c14.chunk.js": "/project-chat/static/js/621.8b907c14.chunk.js",
-    "static/js/24.93e0a0aa.chunk.js": "/project-chat/static/js/24.93e0a0aa.chunk.js",
+    "static/css/445.1bb354ee.chunk.css": "/project-chat/static/css/445.1bb354ee.chunk.css",
+    "static/js/445.014447af.chunk.js": "/project-chat/static/js/445.014447af.chunk.js",
     "static/js/776.3b7f629b.chunk.js": "/project-chat/static/js/776.3b7f629b.chunk.js",
     "static/js/787.35cea4b2.chunk.js": "/project-chat/static/js/787.35cea4b2.chunk.js",
     "static/js/705.078809e9.chunk.js": "/project-chat/static/js/705.078809e9.chunk.js",
@@ -13,18 +14,19 @@
     "static/media/darkgrey-asphalt.jpg": "/project-chat/static/media/darkgrey-asphalt.4312e34c70d2abdbaa54.jpg",
     "static/media/Spin-1s-200px.svg": "/project-chat/static/media/Spin-1s-200px.3de35b0464b50bed12ce48faf841a3d8.svg",
     "index.html": "/project-chat/index.html",
-    "main.9af0e156.css.map": "/project-chat/static/css/main.9af0e156.css.map",
-    "main.774bf697.js.map": "/project-chat/static/js/main.774bf697.js.map",
+    "main.b8e84af3.css.map": "/project-chat/static/css/main.b8e84af3.css.map",
+    "main.6ec6d6d4.js.map": "/project-chat/static/js/main.6ec6d6d4.js.map",
     "427.d62bea5c.chunk.js.map": "/project-chat/static/js/427.d62bea5c.chunk.js.map",
     "621.8b907c14.chunk.js.map": "/project-chat/static/js/621.8b907c14.chunk.js.map",
-    "24.93e0a0aa.chunk.js.map": "/project-chat/static/js/24.93e0a0aa.chunk.js.map",
+    "445.1bb354ee.chunk.css.map": "/project-chat/static/css/445.1bb354ee.chunk.css.map",
+    "445.014447af.chunk.js.map": "/project-chat/static/js/445.014447af.chunk.js.map",
     "776.3b7f629b.chunk.js.map": "/project-chat/static/js/776.3b7f629b.chunk.js.map",
     "787.35cea4b2.chunk.js.map": "/project-chat/static/js/787.35cea4b2.chunk.js.map",
     "705.078809e9.chunk.js.map": "/project-chat/static/js/705.078809e9.chunk.js.map",
     "727.3aa3050e.chunk.js.map": "/project-chat/static/js/727.3aa3050e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9af0e156.css",
-    "static/js/main.774bf697.js"
+    "static/css/main.b8e84af3.css",
+    "static/js/main.6ec6d6d4.js"
   ]
 }
