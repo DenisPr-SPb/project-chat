@@ -4,7 +4,7 @@
     padding: 0 15px;
     margin: 0 15px 15px 0;
     outline: none;
-    border: 1px solid #fff;
+    border: 1px solid #b393d3;
     border-radius: 50px;
     height: 32px;
     letter-spacing: 0.07em;
@@ -12,9 +12,10 @@
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
-    color: #444;
-    background-color: #fff;
+    color: #fff;
+    background-color: #444;
     box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    text-shadow: 0 0 5px #b393d3, 0 0 10px #b393d3, 0 0 10px #b393d3, 0 0 20px #b393d3;
     cursor: pointer;
     user-select: none;
     appearance: none;

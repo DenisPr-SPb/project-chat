@@ -9,15 +9,16 @@ body{
     grid-template-areas:
     'header header'
     'nav profile';
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 125px 1fr;
     grid-template-columns:2fr 10fr;
-    grid-gap: 10px;
+    grid-gap: 5px;
 }
 
 /*MAIN PAGE ELEMENT*/
 
 .main__wrapper{
-    background: lightblue;
+    background: rgba(173, 216, 230, 0.7);
+    border-radius: 5px;
     grid-area: profile;
     padding-bottom: 10px;
     position: relative;
@@ -28,7 +29,9 @@ body{
 
 .nav__wrapper{
     grid-area: nav;
-    background: darkgray;
+    background: rgba(150, 150, 150, 0.5);
+    border-radius: 5px;
+    font-size: 1.5em;
 }
 
 .nav__link{
@@ -47,39 +50,11 @@ body{
 }
 
 .nav__link a.active{
-    color: white;
+    color: #fdfdfe;
+    text-shadow: 0 0 5px #b393d3, 0 0 10px #b393d3, 0 0 10px #b393d3, 0 0 20px #b393d3;
 }
 
 /*PROFILE*/
-
-.profile__wrapper{
-}
-
-.profile__img__wrapper{
-    min-width: 100%;
-    height: 180px;
-    background-image: url("./assets/header/header-logo.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-y: center;
-}
-
-.profile__img__wrapper img {
-
-}
-
-.info__wrapper{
-    max-width: 95%;
-    margin: 10px auto;
-}
-
-.info__avatar img{
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.info__description{
-}
 
 /*POST*/
 .posts__wrapper{

@@ -8,7 +8,11 @@ export function Header({props}) {
         <header className={style.header__wrapper}>
             <div className={style.header__img__wrapper}>
                 <img src={headerLogo} alt="Some"/>
-                <div className={style.header__logo__name}>Peace Among World!</div>
+                <div className={style.header__logo}>
+                    <h1 className={style.header__title}>
+                        Peace Among World!
+                    </h1>
+                </div>
             </div>
             <div className={style.header__login__wrapper}>
                 {props.isAuth ? <div><RoundedButton logo={"LOGOUT"} action={props.logout}/> </div> : <NavLink to='/login'>Login</NavLink>}

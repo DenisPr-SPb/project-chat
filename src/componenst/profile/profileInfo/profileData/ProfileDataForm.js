@@ -1,8 +1,9 @@
-import RoundedButton from "../../common/buttons/rounded-btn/RoundedButton";
+import RoundedButton from "../../../common/buttons/rounded-btn/RoundedButton";
 import {Field, Form, Formik} from "formik";
 import React from "react";
+import style from "./ProfileData.module.css";
 
-export default function ProfileDataForm({profile, updateProfileData}) {
+export default function ProfileDataForm({profile, updateProfileData,savePhoto}) {
     function addNewProfileData(values) {
         updateProfileData(values)
     }
@@ -12,6 +13,12 @@ export default function ProfileDataForm({profile, updateProfileData}) {
 
     function jobLookingStatus(e) {
         initialValues.lookingForAJob = e.target.value !== 'true';
+    }
+
+    function onAvatarPhotoSelected(e) {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
     }
 
     return (
@@ -69,6 +76,11 @@ export default function ProfileDataForm({profile, updateProfileData}) {
                     </Form>
                 )}
             </Formik>
+
+            <div>
+                <label> Change avatar:</label>
+                <input className={style.input} type={'file'} onChange={onAvatarPhotoSelected}/>
+            </div>
         </div>
     )
 }

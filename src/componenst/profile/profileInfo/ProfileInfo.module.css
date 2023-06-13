@@ -1,0 +1,17 @@
+.info__wrapper{
+    max-width: 95%;
+    margin: 5px auto;
+    display: grid;
+    grid-template-columns: 1fr 11fr;
+}
+.avatar__container{}
+
+.description__container{
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+}
+.info__avatar{}
+.info__avatar img{
+    border-radius: 5px;
+    margin-right: 10px;
+}

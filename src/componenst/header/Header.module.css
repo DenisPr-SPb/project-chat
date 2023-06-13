@@ -2,6 +2,7 @@
     padding: 0 20px;
     grid-area: header;
     background: rgba(150, 150, 150, 0.5);
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,7 +18,14 @@
     border-radius: 50%;
 }
 
-.header__logo__name{}
+.header__logo{}
+
+.header__title{
+    font-size: 36px;
+    font-weight: 600;
+    color: #fdfdfe;
+    text-shadow: 0 0 5px #b393d3, 0 0 10px #b393d3, 0 0 10px #b393d3, 0 0 20px #b393d3;
+}
 
 .header__login__wrapper a{
     color: black;
