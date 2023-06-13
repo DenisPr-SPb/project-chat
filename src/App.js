@@ -15,11 +15,23 @@ const DialogsContainer = lazy(() => import ("./componenst/dialogs/DialogsContain
 
 class App extends Component {
 
+    catchAllUnhandledErros = (reason, promise) => {
+        console.log(reason, promise)
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErros)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErros)
     }
 
     render() {
+        if (!this.props.initializeApp) {
+            return <Preloader/>
+        }
         return (
             <div className="app__wrapper">
                 <HeaderContainer/>
@@ -27,6 +39,7 @@ class App extends Component {
                 <div className="main__wrapper">
                     <Suspense fallback={<Preloader/>}>
                         <Routes>
+                            <Route exact path='/' element={<ProfileContainer/>}/>
                             <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
                             <Route path='/dialogs' element={<DialogsContainer/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>

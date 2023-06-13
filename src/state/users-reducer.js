@@ -100,12 +100,15 @@ export function toggleFollowingProgress(isFetching, userId) {
 export function requestUsers(requestedPage, pageSize) {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true))
-
-        const res = await usersAPI.getUsers(requestedPage, pageSize)
-        dispatch(toggleIsFetching(false))
-        dispatch(setCurrentPage(requestedPage))
-        dispatch(setUsers(res.items))
-        dispatch(setTotalUsersCount(res.totalCount))
+        try {
+            const res = await usersAPI.getUsers(requestedPage, pageSize)
+            dispatch(toggleIsFetching(false))
+            dispatch(setCurrentPage(requestedPage))
+            dispatch(setUsers(res.items))
+            dispatch(setTotalUsersCount(res.totalCount))
+        } catch (e) {
+            console.error(`requestUsers, error: ${e}`)
+        }
     }
 }
 
@@ -121,13 +124,21 @@ async function followUnfollowFlow(userId, dispatch, apiMethod, actionCreator){
 
 export function follow(userId) {
     return async (dispatch) => {
-        await followUnfollowFlow(userId, dispatch, usersAPI.setFollow.bind(usersAPI), acceptFollow)
+        try {
+            await followUnfollowFlow(userId, dispatch, usersAPI.setFollow.bind(usersAPI), acceptFollow)
+        } catch (e) {
+            console.error(`follow, error: ${e}`)
+        }
     }
 }
 
 export function unfollow(userId) {
     return async (dispatch) => {
-       await followUnfollowFlow(userId, dispatch, usersAPI.setUnfollow.bind(usersAPI), acceptUnfollow)
+       try {
+           await followUnfollowFlow(userId, dispatch, usersAPI.setUnfollow.bind(usersAPI), acceptUnfollow)
+       } catch (e) {
+           console.error(`unfollow, error: ${e}`)
+       }
     }
 }
 

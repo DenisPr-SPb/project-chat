@@ -55,42 +55,58 @@ export function getCaptchaSuccess(captchaUrl) {
 
 export function getAuthUserData() {
     return async (dispatch) => {
-        const res = await authAPI.authMe()
-        if (res.resultCode === 0) {
-            const {id, email, login} = res.data
-            dispatch(setAuthUserData(id, email, login, true))
+        try {
+            const res = await authAPI.authMe()
+            if (res.resultCode === 0) {
+                const {id, email, login} = res.data
+                dispatch(setAuthUserData(id, email, login, true))
+            }
+        } catch (e) {
+            console.error(`getAuthUserData, error: ${e}`)
         }
     }
 }
 
 export function login(email, password, rememberMe,captchaInput) {
     return async (dispatch) => {
-        const res = await authAPI.login(email, password, rememberMe, captchaInput)
-        if (res.data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        } else {
-            if (res.data.resultCode === 10) {
-                dispatch(getCaptchaUrl())
-            }
+        try {
+            const res = await authAPI.login(email, password, rememberMe, captchaInput)
+            if (res.data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            } else {
+                if (res.data.resultCode === 10) {
+                    dispatch(getCaptchaUrl())
+                }
 
-            dispatch(receivedErrMessage(res.data.messages[0]))
+                dispatch(receivedErrMessage(res.data.messages[0]))
+            }
+        } catch (e) {
+            console.error(`login, error: ${e}`)
         }
     }
 }
 
 export function logout() {
     return async (dispatch) => {
-        const res = await authAPI.logout()
-        if (res.data.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null, false))
+        try {
+            const res = await authAPI.logout()
+            if (res.data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+        } catch (e) {
+            console.error(`logout, error: ${e}`)
         }
     }
 }
 
 export function getCaptchaUrl() {
     return async (dispatch) => {
-        const res = await securityAPI.getCaptchaUrl()
-        const captchaUrl = res.data.url
-        dispatch(getCaptchaSuccess(captchaUrl))
+        try {
+            const res = await securityAPI.getCaptchaUrl()
+            const captchaUrl = res.data.url
+            dispatch(getCaptchaSuccess(captchaUrl))
+        } catch (e) {
+            console.error(`getCaptchaUrl, error: ${e}`)
+        }
     }
 }

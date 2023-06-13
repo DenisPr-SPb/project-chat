@@ -22,9 +22,13 @@ export function initializedSuccess() { return {type: INITIALIZED_SUCCESS}}
 
 export function initializeApp() {
     return (dispatch) => {
-        const authUserPromise = dispatch(getAuthUserData())
-        Promise.all([authUserPromise]).then(() => {
-            dispatch(initializedSuccess())
-        })
+        try {
+            const authUserPromise = dispatch(getAuthUserData())
+            Promise.all([authUserPromise]).then(() => {
+                dispatch(initializedSuccess())
+            })
+        } catch (e) {
+            console.error(`initializeApp, error: ${e}`)
+        }
     }
 }

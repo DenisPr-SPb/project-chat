@@ -85,39 +85,59 @@ export function savePhotoSuccess(photos) {return {type: SAVE_PHOTO_SUCCESS, phot
 
 export function getUserProfile(userId) {
     return async (dispatch) => {
-        const res = await profileAPI.getProfile(userId)
-        dispatch(setUserProfile(res.data))
+        try {
+            const res = await profileAPI.getProfile(userId)
+            dispatch(setUserProfile(res.data))
+        } catch (e) {
+            console.error(`getUserProfile ${userId}, error: ${e}`)
+        }
     }
 }
 
 export function getStatus(userId) {
     return async (dispatch) => {
-        const res = await profileAPI.getStatus(userId)
-        dispatch(setStatus(res.data))
+        try {
+            const res = await profileAPI.getStatus(userId)
+            dispatch(setStatus(res.data))
+        } catch (e) {
+            console.error(`getStatus userId: ${userId} error: ${e}`)
+        }
     }
 }
 
 export function updateStatus(status) {
     return async (dispatch) => {
-        const res = await profileAPI.updateStatus(status)
-        if (res.data.resultCode === 0) {
-            dispatch(setStatus(status))
+        try {
+            const res = await profileAPI.updateStatus(status)
+            if (res.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        } catch (e) {
+            console.error(`updateStatus ${status}, error: ${e}`)
         }
     }
 }
 export function savePhoto(file) {
     return async (dispatch) => {
-        const res = await profileAPI.savePhoto(file)
-        if (res.data.resultCode === 0) {
-            dispatch(savePhotoSuccess(res.data.data.photos))
+        try {
+            const res = await profileAPI.savePhoto(file)
+            if (res.data.resultCode === 0) {
+                dispatch(savePhotoSuccess(res.data.data.photos))
+            }
+        } catch (e) {
+            console.error(`savePhoto ${file}, error: ${e}`)
         }
     }
 }
 export function saveProfileData(profile) {
     return async (dispatch, getState) => {
-        const res = await profileAPI.saveProfileData(profile)
-        if (res.data.resultCode === 0) {
-            dispatch(getUserProfile(getState().auth.userId))
+        try {
+            const res = await profileAPI.saveProfileData(profile)
+            if (res.data.resultCode === 0) {
+                dispatch(getUserProfile(getState().auth.userId))
+            }
+        } catch (e) {
+            console.error(`saveProfileData ${profile}, error: ${e}`)
         }
     }
 }
