@@ -32,7 +32,7 @@ export default function Paginator({
                              }}>{p}</span>
             })}
             {portionCount > portionNumber &&
-                <RoundedButton logo={'Next'} action={() => {setPortionNumber(portionNumber + 1) }}>Next</RoundedButton>}
+                <RoundedButton logo={'Next'} action={() => {setPortionNumber(portionNumber + 1) }}/>}
         </div>
     )
 }

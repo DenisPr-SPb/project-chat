@@ -1,6 +1,7 @@
-import UserItem from "./UserItem";
-import React from "react";
-import Paginator from "../common/Paginator";
+import UserItem from "./UserItem"
+import React from "react"
+import Paginator from "../common/Paginator"
+import style from "./Users.module.css"
 
 export default function Users({
                                   totalUsersCount,
@@ -14,13 +15,15 @@ export default function Users({
                               }) {
 
     return (
-        <div className='users__wrapper'>
+        <div className={style.users__wrapper}>
 
-            <Paginator pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} totalItemsCount={totalUsersCount}/>
+            <div className={style.users__paginator}>
+                <Paginator pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} totalItemsCount={totalUsersCount}/>
+            </div>
 
-            <div className="users__list__wrapper">
+            <div className={style.users__list__wrapper}>
 
-                <div className="users__list">
+                <div className={style.users__list}>
                     {users.map(user => <UserItem
                         key={user.id}
                         user={user}

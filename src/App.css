@@ -97,47 +97,7 @@ body{
 
 /*DIALOGS*/
 
-.dialogs__wrapper{
-    margin: 10px;
-}
-.dialog__info{
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-}
-
-.dialogs__items{
-}
-.dialog__name{
-    margin: 10px;
-}
-
-.dialog__name a {
-    color: black;
-    text-decoration: none;
-}
-
-.dialog__name a.active{
-    color: white;
-}
-.dialog__msg{}
-.msg__item{
-}
-
-.dialog__text__wrapper{
-    margin-top: 10px;
-}
-
 /*USERS*/
-
-.users__wrapper{
-    max-width: 95%;
-    margin: 10px auto;
-}
-.users__list__wrapper{}
-.users__list{}
-.users__list:last-child{
-    margin-bottom: 0;
-}
 .user__item__wrapper{
     display: grid;
     grid-template-columns: 3fr 9fr;
@@ -160,8 +120,11 @@ body{
     background-color: antiquewhite;
 }
 .page__selector{
-    margin-bottom: 10px;
-
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.5);
 }
 
 .page__selector span {

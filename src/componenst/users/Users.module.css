@@ -1,0 +1,17 @@
+.users__wrapper{
+    max-width: 95%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.users__paginator{
+}
+.users__list__wrapper{
+    margin-top: 15px;
+}
+.users__list{
+}
+.users__list:last-child{
+    margin-bottom: 0;
+}

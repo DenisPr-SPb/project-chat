@@ -1,0 +1,46 @@
+.dialogs__wrapper{
+    width: 95%;
+    margin: 10px auto;
+}
+.dialog__info{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.dialogs__items{
+    padding: 5px;
+}
+.dialog__msg{
+    border-radius: 3px;
+    padding:5px;
+    background: rgba(255,255,255,0.2);
+}
+.msg__item{
+}
+.dialog__name a {
+    color: black;
+    text-decoration: none;
+}
+
+.dialog__name a.active{
+    color: white;
+}
+.dialog__text__wrapper{
+    margin: 0 auto;
+}
+.dialog__text__area__wrapper{
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+}
+
+.dialog__text__area__wrapper textarea {
+    width: 95%;
+    border-radius: 5px;
+}
+.new__dialog__btn__wrapper{
+    text-align: center;
+}
