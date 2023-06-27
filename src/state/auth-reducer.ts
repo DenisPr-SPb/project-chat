@@ -5,21 +5,23 @@ const ERROR_MESSAGE = '/auth/ERROR-MESSAGE'
 const GET_CAPTCHA_URL = '/auth/GET-CAPTCHA-URL'
 
 const initialState = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false,
-    error: '',
-    captcha: null
+    error: null as string | null,
+    captcha: null as string | null
 }
 
-export default function authReducer(state = initialState, action) {
+type InitialStateType = typeof initialState
+
+export default function authReducer(state = initialState, action: any):InitialStateType {
     switch (action.type) {
         case SET_USER_DATA:
             return {
                 ...state,
                 ...action.payload,
-                error: ''
+                error: '',
             }
         case ERROR_MESSAGE:
             return  {
@@ -36,25 +38,40 @@ export default function authReducer(state = initialState, action) {
     }
 }
 
-export function setAuthUserData(userId, email, login, isAuth) {
+type PayloadType = {
+    userId: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean | null
+}
+type SetAuthUserDataACType = {
+    type: typeof SET_USER_DATA
+    payload: PayloadType
+}
+export function setAuthUserData(userId:number|null, email:string|null, login:string|null, isAuth:boolean):SetAuthUserDataACType {
     return {type: SET_USER_DATA, payload: {userId, email, login, isAuth}}
 }
 
-export function receivedErrMessage (error) {
+type ReceivedErrMessageACType = {
+    type: typeof ERROR_MESSAGE
+    error: string
+}
+export function receivedErrMessage (error:string):ReceivedErrMessageACType {
     return {type: ERROR_MESSAGE, error}
 }
 
-export function getCaptchaSuccess(captchaUrl) {
-    return {
-        type: GET_CAPTCHA_URL,
-        captchaUrl
-    }
+type GetCaptchaSuccessACType = {
+    type: typeof GET_CAPTCHA_URL
+    captchaUrl: string
+}
+export function getCaptchaSuccess(captchaUrl: string):GetCaptchaSuccessACType {
+    return {type: GET_CAPTCHA_URL, captchaUrl}
 }
 
 // THUNK
 
 export function getAuthUserData() {
-    return async (dispatch) => {
+    return async (dispatch:any) => {
         try {
             const res = await authAPI.authMe()
             if (res.resultCode === 0) {
@@ -67,9 +84,11 @@ export function getAuthUserData() {
     }
 }
 
-export function login(email, password, rememberMe,captchaInput) {
-    return async (dispatch) => {
+export function login(email:string, password:string, rememberMe:boolean,captchaInput:string) {
+    return async (dispatch:any) => {
         try {
+            // todo: Resolve this thunk problem!!!
+            //@ts-ignore
             const res = await authAPI.login(email, password, rememberMe, captchaInput)
             if (res.data.resultCode === 0) {
                 dispatch(getAuthUserData())
@@ -87,7 +106,7 @@ export function login(email, password, rememberMe,captchaInput) {
 }
 
 export function logout() {
-    return async (dispatch) => {
+    return async (dispatch:any) => {
         try {
             const res = await authAPI.logout()
             if (res.data.resultCode === 0) {
@@ -100,7 +119,7 @@ export function logout() {
 }
 
 export function getCaptchaUrl() {
-    return async (dispatch) => {
+    return async (dispatch:any) => {
         try {
             const res = await securityAPI.getCaptchaUrl()
             const captchaUrl = res.data.url

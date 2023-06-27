@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import {PhotosType, PostType, ProfileType} from "../types/types";
 
 const ADD_POST = '/profile/ADD-POST'
 const UPDATE_NEW_POST_TEXT = '/profile/UPDATE-NEW-POST-TEXT'
@@ -13,17 +14,15 @@ const initialState = {
         {id: 22, post: 'Some', date: '', likes: 1},
         {id: 32, post: 'Data', date: '', likes: 1},
         {id: 42, post: 'new Data', date: '', likes: 6}
-    ],
+    ] as Array<PostType>,
     newPostText: '',
-    profile: null,
+    profile: null as ProfileType | null,
     status: ''
 }
-/**
- * @param {Object} state
- * @param {string} action
- * @returns {Object}
- */
-export default function profileReducer(state = initialState, action) {
+
+export type InitialStateType = typeof initialState
+
+export default function profileReducer(state = initialState, action:any):InitialStateType {
     switch (action.type) {
         case ADD_POST:
             const postInfo = {
@@ -60,31 +59,54 @@ export default function profileReducer(state = initialState, action) {
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: action.photos} as ProfileType
             }
         default:
             return state
     }
 }
 
-export function addPostActionCreator() {return {type: ADD_POST}}
+type AddPostActionCreatorACType = {
+    type: typeof ADD_POST
+}
+export function addPostActionCreator():AddPostActionCreatorACType {return {type: ADD_POST}}
 
-export function updateNewPostTextActionCreator(text) {return {type: UPDATE_NEW_POST_TEXT, text}}
+type UpdateNewPostTextActionCreatorACType = {
+    type: typeof UPDATE_NEW_POST_TEXT
+    text: string
+}
+export function updateNewPostTextActionCreator(text:string): UpdateNewPostTextActionCreatorACType {return {type: UPDATE_NEW_POST_TEXT, text}}
 
-export function setUserProfile(profile) {return {type: SET_USER_PROFILE, profile}}
+type SetUserProfileACType = {
+    type: typeof SET_USER_PROFILE
+    profile: ProfileType
+}
+export function setUserProfile(profile:ProfileType):SetUserProfileACType {return {type: SET_USER_PROFILE, profile}}
 
-export function setStatus(status) {return { type: SET_STATUS, status}}
+type SetStatusACType = {
+    type: typeof SET_STATUS
+    status: string
+}
+export function setStatus(status:string):SetStatusACType {return { type: SET_STATUS, status}}
 
-export function deletePost(postId) {return {type: DELETE_POST, postId}}
+type DeletePostACType = {
+    type: typeof DELETE_POST
+    postId: number
+}
+export function deletePost(postId:number):DeletePostACType {return {type: DELETE_POST, postId}}
 
-export function savePhotoSuccess(photos) {return {type: SAVE_PHOTO_SUCCESS, photos}}
+type SavePhotoSuccessACType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: PhotosType
+}
+export function savePhotoSuccess(photos: PhotosType):SavePhotoSuccessACType {return {type: SAVE_PHOTO_SUCCESS, photos}}
 
 
 
 //THUNK
 
-export function getUserProfile(userId) {
-    return async (dispatch) => {
+export function getUserProfile(userId:number) {
+    return async (dispatch:any) => {
         try {
             const res = await profileAPI.getProfile(userId)
             dispatch(setUserProfile(res.data))
@@ -94,8 +116,8 @@ export function getUserProfile(userId) {
     }
 }
 
-export function getStatus(userId) {
-    return async (dispatch) => {
+export function getStatus(userId: number) {
+    return async (dispatch: any) => {
         try {
             const res = await profileAPI.getStatus(userId)
             dispatch(setStatus(res.data))
@@ -105,8 +127,8 @@ export function getStatus(userId) {
     }
 }
 
-export function updateStatus(status) {
-    return async (dispatch) => {
+export function updateStatus(status:string) {
+    return async (dispatch:any) => {
         try {
             const res = await profileAPI.updateStatus(status)
             if (res.data.resultCode === 0) {
@@ -117,8 +139,8 @@ export function updateStatus(status) {
         }
     }
 }
-export function savePhoto(file) {
-    return async (dispatch) => {
+export function savePhoto(file:any) {
+    return async (dispatch:any) => {
         try {
             const res = await profileAPI.savePhoto(file)
             if (res.data.resultCode === 0) {
@@ -129,8 +151,8 @@ export function savePhoto(file) {
         }
     }
 }
-export function saveProfileData(profile) {
-    return async (dispatch, getState) => {
+export function saveProfileData(profile:ProfileType) {
+    return async (dispatch:any, getState:any) => {
         try {
             const res = await profileAPI.saveProfileData(profile)
             if (res.data.resultCode === 0) {
