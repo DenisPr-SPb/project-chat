@@ -1,4 +1,5 @@
 import {CompanionType, MessageType} from "../types/types";
+import {Actions} from "@reduxjs/toolkit";
 
 const SEND_MESSAGE = '/dialog/SEND-MESSAGE'
 const UPDATE_NEW_MSG_TEXT = '/dialog/UPDATE-NEW-MSG-TEXT'
@@ -19,7 +20,7 @@ const initialState = {
 
 export type InitialStateType = typeof initialState
 
-export default function dialogsReducer (state = initialState, action:any): InitialStateType {
+export default function dialogsReducer (state = initialState, action: ActionType): InitialStateType {
     switch (action.type) {
         case SEND_MESSAGE:
             const msgData = {
@@ -43,6 +44,8 @@ export default function dialogsReducer (state = initialState, action:any): Initi
             return state
     }
 }
+
+type ActionType = SendMessageCreatorACType | UpdateNewMessageTextCreatorACType
 
 type SendMessageCreatorACType = {
     type: typeof SEND_MESSAGE

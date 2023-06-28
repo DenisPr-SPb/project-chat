@@ -22,7 +22,7 @@ const initialState = {
 
 export type InitialStateType = typeof initialState
 
-export default function profileReducer(state = initialState, action:any):InitialStateType {
+export default function profileReducer(state = initialState, action: ActionType):InitialStateType {
     switch (action.type) {
         case ADD_POST:
             const postInfo = {
@@ -65,6 +65,8 @@ export default function profileReducer(state = initialState, action:any):Initial
             return state
     }
 }
+
+type ActionType = AddPostActionCreatorACType | UpdateNewPostTextActionCreatorACType | SetUserProfileACType | SetStatusACType | DeletePostACType | SavePhotoSuccessACType
 
 type AddPostActionCreatorACType = {
     type: typeof ADD_POST

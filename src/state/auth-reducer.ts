@@ -8,14 +8,14 @@ const initialState = {
     userId: null as number | null,
     email: null as string | null,
     login: null as string | null,
-    isAuth: false,
+    isAuth: false as boolean | null,
     error: null as string | null,
     captcha: null as string | null
 }
 
 type InitialStateType = typeof initialState
 
-export default function authReducer(state = initialState, action: any):InitialStateType {
+export default function authReducer(state = initialState, action: ActionType):InitialStateType {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -37,6 +37,7 @@ export default function authReducer(state = initialState, action: any):InitialSt
             return state
     }
 }
+type ActionType = SetAuthUserDataACType | ReceivedErrMessageACType | GetCaptchaSuccessACType
 
 type PayloadType = {
     userId: number | null

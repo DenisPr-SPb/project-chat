@@ -1,6 +1,7 @@
 import {getAuthUserData} from "./auth-reducer";
 
 const INITIALIZED_SUCCESS = '/app/INITIALIZED-SUCCESS'
+const INISSS = 'INISSS'
 
 export type InitialStateType = {
     initialized: boolean
@@ -10,7 +11,7 @@ const initialState: InitialStateType = {
     initialized: false
 }
 
-export default function appReducer(state = initialState, action: any): InitialStateType {
+export default function appReducer(state = initialState, action: InitializedSuccessACType): InitialStateType {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {

@@ -28,7 +28,7 @@ const initialState: InitialStateType = {
     followingInProgress: []
 }
 
-export default function usersReducer(state = initialState, action:ActionsType):InitialStateType {
+export default function usersReducer(state = initialState, action:ActionType):InitialStateType {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -72,7 +72,7 @@ export default function usersReducer(state = initialState, action:ActionsType):I
     }
 }
 
-type ActionsType = AcceptFollowACType | AcceptUnfollowACType |SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
+type ActionType = AcceptFollowACType | AcceptUnfollowACType |SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
 
 type AcceptFollowACType = {
     type: typeof FOLLOW
