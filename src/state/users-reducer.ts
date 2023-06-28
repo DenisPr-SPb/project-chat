@@ -1,6 +1,9 @@
 import {usersAPI} from "../api/api";
 import {updateObjectInArray} from "../componenst/helpers/object-helpers";
 import {UserType} from "../types/types";
+import {Dispatch} from "redux";
+import {AppStateType} from "./redux-store";
+import {ThunkAction} from "redux-thunk";
 
 const FOLLOW = '/users/FOLLOW'
 const UNFOLLOW = '/users/UNFOLLOW'
@@ -133,8 +136,10 @@ export function toggleFollowingProgress(isFetching:boolean, userId:number):Toggl
 
 // THUNK - запросы
 
-export function requestUsers(requestedPage:number, pageSize:number) {
-    return async (dispatch:any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+
+export function requestUsers(requestedPage:number, pageSize:number): ThunkType {
+    return async (dispatch, getState) => {
         dispatch(toggleIsFetching(true))
         try {
             const res = await usersAPI.getUsers(requestedPage, pageSize)
@@ -148,7 +153,12 @@ export function requestUsers(requestedPage:number, pageSize:number) {
     }
 }
 
-async function followUnfollowFlow(userId:number, dispatch:any, apiMethod:any, actionCreator:any){
+async function _followUnfollowFlow(
+    userId:number,
+    dispatch: Dispatch<ActionType>,
+    apiMethod:any,
+    actionCreator:(userId:number)=>AcceptFollowACType | AcceptUnfollowACType)
+{
     dispatch(toggleFollowingProgress(true, userId))
     const res = await apiMethod(userId)
     if (res.data.resultCode === 0) {
@@ -158,20 +168,20 @@ async function followUnfollowFlow(userId:number, dispatch:any, apiMethod:any, ac
 
 }
 
-export function follow(userId:number) {
-    return async (dispatch:any) => {
+export function follow(userId:number):ThunkType {
+    return async (dispatch) => {
         try {
-            await followUnfollowFlow(userId, dispatch, usersAPI.setFollow.bind(usersAPI), acceptFollow)
+            await _followUnfollowFlow(userId, dispatch, usersAPI.setFollow.bind(usersAPI), acceptFollow)
         } catch (e) {
             console.error(`follow, error: ${e}`)
         }
     }
 }
 
-export function unfollow(userId:number) {
-    return async (dispatch:any) => {
+export function unfollow(userId:number):ThunkType {
+    return async (dispatch) => {
        try {
-           await followUnfollowFlow(userId, dispatch, usersAPI.setUnfollow.bind(usersAPI), acceptUnfollow)
+           await _followUnfollowFlow(userId, dispatch, usersAPI.setUnfollow.bind(usersAPI), acceptUnfollow)
        } catch (e) {
            console.error(`unfollow, error: ${e}`)
        }

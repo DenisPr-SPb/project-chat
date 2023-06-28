@@ -1,5 +1,4 @@
 import {CompanionType, MessageType} from "../types/types";
-import {Actions} from "@reduxjs/toolkit";
 
 const SEND_MESSAGE = '/dialog/SEND-MESSAGE'
 const UPDATE_NEW_MSG_TEXT = '/dialog/UPDATE-NEW-MSG-TEXT'

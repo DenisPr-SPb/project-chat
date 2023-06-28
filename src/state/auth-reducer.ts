@@ -1,4 +1,6 @@
 import {authAPI, securityAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const SET_USER_DATA = '/auth/SET-USER-DATA'
 const ERROR_MESSAGE = '/auth/ERROR-MESSAGE'
@@ -70,9 +72,10 @@ export function getCaptchaSuccess(captchaUrl: string):GetCaptchaSuccessACType {
 }
 
 // THUNK
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
-export function getAuthUserData() {
-    return async (dispatch:any) => {
+export function getAuthUserData():ThunkType {
+    return async (dispatch) => {
         try {
             const res = await authAPI.authMe()
             if (res.resultCode === 0) {
@@ -85,8 +88,8 @@ export function getAuthUserData() {
     }
 }
 
-export function login(email:string, password:string, rememberMe:boolean,captchaInput:string) {
-    return async (dispatch:any) => {
+export function login(email:string, password:string, rememberMe:boolean,captchaInput:string):ThunkType {
+    return async (dispatch) => {
         try {
             // todo: Resolve this thunk problem!!!
             //@ts-ignore
@@ -106,8 +109,8 @@ export function login(email:string, password:string, rememberMe:boolean,captchaI
     }
 }
 
-export function logout() {
-    return async (dispatch:any) => {
+export function logout():ThunkType {
+    return async (dispatch) => {
         try {
             const res = await authAPI.logout()
             if (res.data.resultCode === 0) {
@@ -119,8 +122,8 @@ export function logout() {
     }
 }
 
-export function getCaptchaUrl() {
-    return async (dispatch:any) => {
+export function getCaptchaUrl():ThunkType {
+    return async (dispatch) => {
         try {
             const res = await securityAPI.getCaptchaUrl()
             const captchaUrl = res.data.url
