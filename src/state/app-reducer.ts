@@ -15,7 +15,7 @@ export default function appReducer(state = initialState, action: any): InitialSt
         case INITIALIZED_SUCCESS:
             return {
                 ...state,
-                initialized: true
+                initialized: true,
             }
         default:
             return state

@@ -10,18 +10,25 @@ const SET_TOTAL_USERS_COUNT = '/users/SET-TOTAL-USERS-COUNT'
 const TOGGLE_IS_FETCHING = '/users/TOGGLE-IS-FETCHING'
 const TOGGLE_FOLLOWING_IN_PROGRESS = '/users/TOGGLE-FOLLOWING-IN-PROGRESS'
 
-const initialState = {
-    users: [] as Array<UserType>,
-    pageSize: 7 as number,
-    totalUsersCount: 0 as number,
-    currentPage: 1 as number,
-    isFetching: false,
-    followingInProgress: [] as Array<number> // Array of users Id
+export type InitialStateType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: Array<number>// Array of users Id
 }
 
-export type InitialStateType = typeof initialState
+const initialState: InitialStateType = {
+    users: [],
+    pageSize: 7,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: []
+}
 
-export default function usersReducer(state = initialState, action:any):InitialStateType {
+export default function usersReducer(state = initialState, action:ActionsType):InitialStateType {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -64,6 +71,8 @@ export default function usersReducer(state = initialState, action:any):InitialSt
             return state
     }
 }
+
+type ActionsType = AcceptFollowACType | AcceptUnfollowACType |SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
 
 type AcceptFollowACType = {
     type: typeof FOLLOW

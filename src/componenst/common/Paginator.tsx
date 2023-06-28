@@ -1,13 +1,19 @@
-import React, {useState} from "react";
-import RoundedButton from "./buttons/rounded-btn/RoundedButton";
+import React, {useState} from "react"
+import RoundedButton from "./buttons/rounded-btn/RoundedButton"
 
-export default function Paginator({
-                                      totalItemsCount,
-                                      pageSize,
-                                      currentPage,
-                                      onPageChanged,
-                                      portionSize = 12
-                                  }) {
+type PropsType = {
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number)=>void
+    portionSize?: number
+}
+export default function Paginator({totalItemsCount,
+                                  pageSize,
+                                  currentPage,
+                                  onPageChanged,
+                                  portionSize = 12
+                                  }:PropsType) {
     const pagesCount = Math.ceil(totalItemsCount / pageSize)
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {

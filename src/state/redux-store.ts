@@ -6,7 +6,7 @@ import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
 import appReducer from "./app-reducer";
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogsReducer,
     usersPage: usersReducer,
@@ -14,11 +14,14 @@ const reducers = combineReducers({
     app: appReducer
 })
 
+type RootReducerType = typeof rootReducer
+export type AppStateType = ReturnType<RootReducerType>
+//@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = legacy_createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
+const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 // const store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export default store
-
+//@ts-ignore
 window.store = store

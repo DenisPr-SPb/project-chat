@@ -1,23 +1,44 @@
-import {connect} from "react-redux";
-import {requestUsers, follow, unfollow} from "../../state/users-reducer";
-import React from "react";
-import Users from "./Users";
-import Preloader from "../common/Preloader";
+import {connect} from "react-redux"
+import {requestUsers, follow, unfollow} from "../../state/users-reducer"
+import React from "react"
+import Users from "./Users"
+import Preloader from "../common/Preloader"
 import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsers
-} from "../../state/users-selector";
+    getUsersList
+} from "../../state/users-selector"
+import {UserType} from "../../types/types";
+import {AppStateType} from "../../state/redux-store";
 
-class UsersContainer extends React.Component {
+type MapStatePropsType = {
+    currentPage: number
+    pageSize: number
+    totalUsersCount: number
+    isFetching: boolean
+    followingInProgress: Array<number>
+    users: Array<UserType>
+}
+type MapDispatchPropsType = {
+    requestUsers: (currentP:number, sizeP:number)=>void
+    follow: (userId:number)=>void
+    unfollow: (userId:number)=>void
+}
+
+type OwnPropsType = {}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
+type StateType = {}
+
+class UsersContainer extends React.Component<PropsType, StateType> {
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber:number) => {
         this.props.requestUsers(pageNumber, this.props.pageSize)
     }
 
@@ -42,9 +63,9 @@ class UsersContainer extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state:AppStateType):MapStatePropsType {
     return {
-        users: getUsers(state),
+        users: getUsersList(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
@@ -53,7 +74,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {
+export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
     follow,
     unfollow,
     requestUsers

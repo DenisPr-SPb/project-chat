@@ -46,5 +46,6 @@ export type UserType = {
     name: string
     status: string | null
     photos: PhotosType
-    followed: boolean
+    followed: boolean,
+    uniqueUrlName?: string | null
 }

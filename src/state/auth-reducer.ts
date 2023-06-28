@@ -21,12 +21,12 @@ export default function authReducer(state = initialState, action: any):InitialSt
             return {
                 ...state,
                 ...action.payload,
-                error: '',
+                error: ''
             }
         case ERROR_MESSAGE:
             return  {
                 ...state,
-                error: action.error
+                error: action.error,
             }
         case GET_CAPTCHA_URL:
             return {
