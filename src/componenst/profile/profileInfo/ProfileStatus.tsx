@@ -1,13 +1,17 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {useState, useEffect} from "react";
 
-export default function ProfileStatus({props}) {
-    const [status, setStatus] = useState(props.status)
+type PropsType = {
+    propsStatus: string
+    updateStatus: (status:string)=>void
+}
+export default function ProfileStatus({propsStatus, updateStatus}:PropsType) {
+    const [status, setStatus] = useState(propsStatus)
     const [editMode, setEditMode] = useState(false)
 
     useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
+        setStatus(propsStatus)
+    }, [propsStatus])
 
     function activateEditMode () {
         return setEditMode(true)
@@ -15,10 +19,10 @@ export default function ProfileStatus({props}) {
 
     function deactivateEditMOde () {
         setEditMode(false)
-        props.updateStatus(status)
+        updateStatus(status)
     }
 
-    function onStatusChange(e) {
+    function onStatusChange(e: ChangeEvent<HTMLInputElement>) {
         setStatus(e.currentTarget.value)
     }
 

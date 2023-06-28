@@ -2,6 +2,7 @@ import {profileAPI} from "../api/api";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {File} from "buffer";
 
 const ADD_POST = '/profile/ADD-POST'
 const UPDATE_NEW_POST_TEXT = '/profile/UPDATE-NEW-POST-TEXT'
@@ -145,7 +146,7 @@ export function updateStatus(status:string):ThunkType {
         }
     }
 }
-export function savePhoto(file:any):ThunkType {
+export function savePhoto(file: File):ThunkType {
     return async (dispatch) => {
         try {
             const res = await profileAPI.savePhoto(file)

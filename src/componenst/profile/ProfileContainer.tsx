@@ -5,14 +5,34 @@ import {getStatus, getUserProfile, savePhoto, saveProfileData, updateStatus} fro
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../hocs/withAuthRedirect";
 import {compose} from "redux";
+import {ProfileType} from "../../types/types";
+import {AppStateType} from "../../state/redux-store";
 
-class ProfileContainer extends React.Component {
+type MapStatePropsType = {
+    profile: ProfileType | null
+    status: string
+    loggedUserId: number | null
+}
+type MapDispatchPropsType = {
+    getUserProfile: (userId:number)=>void
+    getStatus:(userId:number)=>void
+    updateStatus: ()=>void
+    savePhoto:()=>void
+    saveProfileData:()=>void
+}
+type OwnPropsType = {
+    router: any
+}
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
+type StateType = {}
+
+class ProfileContainer extends React.Component<PropsType, StateType> {
 
     profileRefresh() {
         let userId = this.props.router.params.userId
 
         if (!userId) {
-            userId = this.props.loggedUserId.toString()
+            userId = this.props.loggedUserId
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -21,8 +41,8 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         this.profileRefresh()
     }
-
-    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+    //@ts-ignore
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.router.params.userId !== prevProps.router.params.userId) {
             this.profileRefresh()
         }
@@ -40,7 +60,7 @@ class ProfileContainer extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state:AppStateType):MapStatePropsType {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
@@ -48,8 +68,8 @@ function mapStateToProps(state) {
     }
 }
 
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
+function withRouter(Component:any) {
+    function ComponentWithRouterProp(props:any) {
         let location = useLocation()
         let navigate = useNavigate()
         let params = useParams()
