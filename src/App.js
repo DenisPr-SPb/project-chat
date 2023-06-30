@@ -1,35 +1,35 @@
-import {Route, Routes, useLocation, useNavigate, useParams} from "react-router-dom";
-import './App.css';
-import {Navbar} from "./componenst/navbar/Navbar";
-import HeaderContainer from "./componenst/header/HeaderContainer";
-import React, {Component, Suspense, lazy} from "react";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {initializeApp} from "./state/app-reducer";
-import Preloader from "./componenst/common/Preloader";
+import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
+import './App.css'
+import { Navbar } from './componenst/navbar/Navbar'
+import HeaderContainer from './componenst/header/HeaderContainer'
+import React, { Component, Suspense, lazy } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { initializeApp } from './state/app-reducer'
+import Preloader from './componenst/common/Preloader'
 
-const LoginContainer = lazy(() => import ("./componenst/login/LoginContainer"))
-const UsersContainer = lazy(() => import ("./componenst/users/UsersContainer"))
-const ProfileContainer = lazy(() => import ("./componenst/profile/ProfileContainer"))
-const DialogsContainer = lazy(() => import ("./componenst/dialogs/DialogsContainer"))
+const LoginContainer = lazy( () => import ('./componenst/login/LoginContainer') )
+const UsersContainer = lazy( () => import ('./componenst/users/UsersContainer') )
+const ProfileContainer = lazy( () => import ('./componenst/profile/ProfileContainer') )
+const DialogsContainer = lazy( () => import ('./componenst/dialogs/DialogsContainer') )
 
 class App extends Component {
 
-    catchAllUnhandledErros = (reason, promise) => {
-        console.log(reason, promise)
+    catchAllUnhandledErros = ( reason, promise ) => {
+        console.log( reason, promise )
     }
 
     componentDidMount() {
         this.props.initializeApp()
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErros)
+        window.addEventListener( 'unhandledrejection', this.catchAllUnhandledErros )
     }
 
     componentWillUnmount() {
-        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErros)
+        window.removeEventListener( 'unhandledrejection', this.catchAllUnhandledErros )
     }
 
     render() {
-        if (!this.props.initializeApp) {
+        if ( !this.props.initializeApp ) {
             return <Preloader/>
         }
         return (
@@ -37,38 +37,38 @@ class App extends Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="main__wrapper">
-                    <Suspense fallback={<Preloader/>}>
+                    <Suspense fallback={ <Preloader/> }>
                         <Routes>
-                            <Route exact path='/' element={<ProfileContainer/>}/>
-                            <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
-                            <Route path='/dialogs' element={<DialogsContainer/>}/>
-                            <Route path='/users' element={<UsersContainer/>}/>
-                            <Route path='/login' element={<LoginContainer/>}/>
+                            <Route exact path="/" element={ <ProfileContainer/> }/>
+                            <Route path="/profile/:userId?" element={ <ProfileContainer/> }/>
+                            <Route path="/dialogs" element={ <DialogsContainer/> }/>
+                            <Route path="/users" element={ <UsersContainer/> }/>
+                            <Route path="/login" element={ <LoginContainer/> }/>
                         </Routes>
                     </Suspense>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps( state ) {
     return {
         initialized: state.app.initialized
     }
 }
 
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
+function withRouter( Component ) {
+    function ComponentWithRouterProp( props ) {
         let location = useLocation()
         let navigate = useNavigate()
         let params = useParams()
         return (
             <Component
-                {...props}
-                router={{location, navigate, params}}
+                { ...props }
+                router={ { location, navigate, params } }
             />
-        );
+        )
     }
 
     return ComponentWithRouterProp
@@ -77,5 +77,5 @@ function withRouter(Component) {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initializeApp})
-)(App)
+    connect( mapStateToProps, { initializeApp } )
+)( App )
