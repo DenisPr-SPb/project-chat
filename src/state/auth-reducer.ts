@@ -1,10 +1,6 @@
 import {authAPI, securityAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
-
-const SET_USER_DATA = '/auth/SET-USER-DATA'
-const ERROR_MESSAGE = '/auth/ERROR-MESSAGE'
-const GET_CAPTCHA_URL = '/auth/GET-CAPTCHA-URL'
+import {AppStateType, InferActionsTypes} from "./redux-store";
 
 const initialState = {
     userId: null as number | null,
@@ -19,18 +15,18 @@ type InitialStateType = typeof initialState
 
 export default function authReducer(state = initialState, action: ActionType):InitialStateType {
     switch (action.type) {
-        case SET_USER_DATA:
+        case "/auth/SET-USER-DATA":
             return {
                 ...state,
                 ...action.payload,
                 error: ''
             }
-        case ERROR_MESSAGE:
+        case '/auth/ERROR-MESSAGE':
             return  {
                 ...state,
                 error: action.error,
             }
-        case GET_CAPTCHA_URL:
+        case "/auth/GET-CAPTCHA-URL":
             return {
                 ...state,
                 captcha: action.captchaUrl
@@ -39,36 +35,12 @@ export default function authReducer(state = initialState, action: ActionType):In
             return state
     }
 }
-type ActionType = SetAuthUserDataACType | ReceivedErrMessageACType | GetCaptchaSuccessACType
+type ActionType = InferActionsTypes<typeof actions>
+export const actions = {
+    setAuthUserData:(userId:number|null, email:string|null, login:string|null, isAuth:boolean)=> {return {type: '/auth/SET-USER-DATA', payload: {userId, email, login, isAuth}} as const},
+    receivedErrMessage:(error:string)=> {return {type:'/auth/ERROR-MESSAGE' , error} as const},
+    getCaptchaSuccess:(captchaUrl: string)=> {return {type: '/auth/GET-CAPTCHA-URL', captchaUrl} as const}
 
-type PayloadType = {
-    userId: number | null
-    email: string | null
-    login: string | null
-    isAuth: boolean | null
-}
-type SetAuthUserDataACType = {
-    type: typeof SET_USER_DATA
-    payload: PayloadType
-}
-export function setAuthUserData(userId:number|null, email:string|null, login:string|null, isAuth:boolean):SetAuthUserDataACType {
-    return {type: SET_USER_DATA, payload: {userId, email, login, isAuth}}
-}
-
-type ReceivedErrMessageACType = {
-    type: typeof ERROR_MESSAGE
-    error: string
-}
-export function receivedErrMessage (error:string):ReceivedErrMessageACType {
-    return {type: ERROR_MESSAGE, error}
-}
-
-type GetCaptchaSuccessACType = {
-    type: typeof GET_CAPTCHA_URL
-    captchaUrl: string
-}
-export function getCaptchaSuccess(captchaUrl: string):GetCaptchaSuccessACType {
-    return {type: GET_CAPTCHA_URL, captchaUrl}
 }
 
 // THUNK
@@ -80,7 +52,7 @@ export function getAuthUserData():ThunkType {
             const res = await authAPI.authMe()
             if (res.resultCode === 0) {
                 const {id, email, login} = res.data
-                dispatch(setAuthUserData(id, email, login, true))
+                dispatch(actions.setAuthUserData(id, email, login, true))
             }
         } catch (e) {
             console.error(`getAuthUserData, error: ${e}`)
@@ -101,7 +73,7 @@ export function login(email:string, password:string, rememberMe:boolean,captchaI
                     dispatch(getCaptchaUrl())
                 }
 
-                dispatch(receivedErrMessage(res.data.messages[0]))
+                dispatch(actions.receivedErrMessage(res.data.messages[0]))
             }
         } catch (e) {
             console.error(`login, error: ${e}`)
@@ -114,7 +86,7 @@ export function logout():ThunkType {
         try {
             const res = await authAPI.logout()
             if (res.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
+                dispatch(actions.setAuthUserData(null, null, null, false))
             }
         } catch (e) {
             console.error(`logout, error: ${e}`)
@@ -127,7 +99,7 @@ export function getCaptchaUrl():ThunkType {
         try {
             const res = await securityAPI.getCaptchaUrl()
             const captchaUrl = res.data.url
-            dispatch(getCaptchaSuccess(captchaUrl))
+            dispatch(actions.getCaptchaSuccess(captchaUrl))
         } catch (e) {
             console.error(`getCaptchaUrl, error: ${e}`)
         }

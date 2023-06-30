@@ -1,7 +1,5 @@
 import {CompanionType, MessageType} from "../types/types";
-
-const SEND_MESSAGE = '/dialog/SEND-MESSAGE'
-const UPDATE_NEW_MSG_TEXT = '/dialog/UPDATE-NEW-MSG-TEXT'
+import {InferActionsTypes} from "./redux-store";
 
 const initialState = {
     companions: [
@@ -21,7 +19,7 @@ export type InitialStateType = typeof initialState
 
 export default function dialogsReducer (state = initialState, action: ActionType): InitialStateType {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case "/dialog/SEND-MESSAGE":
             const msgData = {
                 id: Date.now(),
                 message: state.newMsgText,
@@ -33,7 +31,7 @@ export default function dialogsReducer (state = initialState, action: ActionType
                 messages: [...state.messages, msgData],
             }
 
-        case UPDATE_NEW_MSG_TEXT:
+        case "/dialog/UPDATE-NEW-MSG-TEXT":
             return {
                 ...state,
                 newMsgText: action.newMsgText
@@ -44,19 +42,9 @@ export default function dialogsReducer (state = initialState, action: ActionType
     }
 }
 
-type ActionType = SendMessageCreatorACType | UpdateNewMessageTextCreatorACType
+type ActionType = InferActionsTypes<typeof actions>
 
-type SendMessageCreatorACType = {
-    type: typeof SEND_MESSAGE
-}
-export function sendMessageCreator():SendMessageCreatorACType {
-    return {type: SEND_MESSAGE}
-}
-
-type UpdateNewMessageTextCreatorACType = {
-    type: typeof UPDATE_NEW_MSG_TEXT
-    newMsgText: string
-}
-export function updateNewMessageTextCreator (text:string):UpdateNewMessageTextCreatorACType {
-    return {type: UPDATE_NEW_MSG_TEXT, newMsgText: text}
+export const actions = {
+    sendMessageCreator:()=> {return {type: '/dialog/SEND-MESSAGE'} as const},
+    updateNewMessageTextCreator: (text:string)=> {return {type: '/dialog/UPDATE-NEW-MSG-TEXT', newMsgText: text} as const}
 }
