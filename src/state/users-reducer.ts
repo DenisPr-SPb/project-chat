@@ -12,7 +12,13 @@ type InitialStateType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>// Array of users Id
+    filter: {
+        term: string
+        friend: null | boolean
+    }
 }
+
+
 
 const initialState: InitialStateType = {
     users: [],
@@ -20,8 +26,14 @@ const initialState: InitialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    filter: {
+        term: '',
+        friend: null
+    }
 }
+
+export type FilterType = typeof initialState.filter
 
 export default function usersReducer( state = initialState, action: ActionType ): InitialStateType {
     switch ( action.type ) {
@@ -62,6 +74,11 @@ export default function usersReducer( state = initialState, action: ActionType )
                     ? [ ...state.followingInProgress, action.userId ]
                     : state.followingInProgress.filter( id => id !== action.userId )
             }
+        case '/users/SET-FILTER':
+            return {
+                ...state,
+                filter: action.payload
+            }
         default:
             return state
     }
@@ -75,6 +92,9 @@ export const actions = {
     },
     acceptUnfollow: ( userId: number ) => {
         return { type: '/users/UNFOLLOW', userId } as const
+    },
+    setFilter: ( filter: FilterType ) => {
+        return { type: '/users/SET-FILTER', payload: filter } as const
     },
     setUsers: ( users: Array<UserType> ) => {
         return { type: '/users/SET-USERS', users } as const
@@ -96,15 +116,17 @@ export const actions = {
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
-export function requestUsers( requestedPage: number, pageSize: number ): ThunkType {
+export function requestUsers( requestedPage: number, pageSize: number, filter: FilterType ): ThunkType {
     return async ( dispatch, getState ) => {
         dispatch( actions.toggleIsFetching( true ) )
         try {
-            const res = await usersAPI.getUsers( requestedPage, pageSize )
+            const res = await usersAPI.getUsers( requestedPage, pageSize, filter.term, filter.friend )
             dispatch( actions.toggleIsFetching( false ) )
+            dispatch( actions.setFilter( filter ) )
             dispatch( actions.setCurrentPage( requestedPage ) )
             dispatch( actions.setUsers( res.items ) )
             dispatch( actions.setTotalUsersCount( res.totalCount ) )
+
         } catch ( e ) {
             console.error( `requestUsers, error: ${ e }` )
         }

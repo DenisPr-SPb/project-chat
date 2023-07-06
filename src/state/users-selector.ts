@@ -29,3 +29,7 @@ export function getFollowingInProgress( state: AppStateType ) {
     return state.usersPage.followingInProgress
 }
 
+export function getFilter( state: AppStateType){
+    return state.usersPage.filter
+}
+

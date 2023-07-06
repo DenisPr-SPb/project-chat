@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from './state/app-reducer'
 import Preloader from './componenst/common/Preloader'
+import UsersPage from './componenst/users/UsersPage'
 
 const LoginContainer = lazy( () => import ('./componenst/login/LoginContainer') )
-const UsersContainer = lazy( () => import ('./componenst/users/UsersContainer') )
 const ProfileContainer = lazy( () => import ('./componenst/profile/ProfileContainer') )
 const DialogsContainer = lazy( () => import ('./componenst/dialogs/DialogsContainer') )
 
@@ -42,7 +42,7 @@ class App extends Component {
                             <Route exact path="/" element={ <ProfileContainer/> }/>
                             <Route path="/profile/:userId?" element={ <ProfileContainer/> }/>
                             <Route path="/dialogs" element={ <DialogsContainer/> }/>
-                            <Route path="/users" element={ <UsersContainer/> }/>
+                            <Route path="/users" element={ <UsersPage/> }/>
                             <Route path="/login" element={ <LoginContainer/> }/>
                         </Routes>
                     </Suspense>

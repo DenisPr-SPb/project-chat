@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install
+RUN npm install -g npm@9.7.2
+
+RUN npm install --legacy-peer-deps
 
 COPY . .
 

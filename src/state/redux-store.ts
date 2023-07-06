@@ -22,6 +22,7 @@ type PropertiesType<T> = T extends { [ key: string ]: infer U } ? U : never
 export type InferActionsTypes<T extends { [ key: string ]: ( ...args: any[] ) => any }> = ReturnType<PropertiesType<T>>
 //@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = legacy_createStore( rootReducer, composeEnhancers( applyMiddleware( thunkMiddleware ) ) )
 
 // const store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware))

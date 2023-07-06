@@ -5,6 +5,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+.user__form {
+    display: flex;
+}
 .users__paginator{
 }
 .users__list__wrapper{
