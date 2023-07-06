@@ -8,8 +8,8 @@ import { compose } from 'redux'
 import { initializeApp } from './state/app-reducer'
 import Preloader from './componenst/common/Preloader'
 import UsersPage from './componenst/users/UsersPage'
+import Login from './componenst/login/Login'
 
-const LoginContainer = lazy( () => import ('./componenst/login/LoginContainer') )
 const ProfileContainer = lazy( () => import ('./componenst/profile/ProfileContainer') )
 const DialogsContainer = lazy( () => import ('./componenst/dialogs/DialogsContainer') )
 
@@ -43,7 +43,7 @@ class App extends Component {
                             <Route path="/profile/:userId?" element={ <ProfileContainer/> }/>
                             <Route path="/dialogs" element={ <DialogsContainer/> }/>
                             <Route path="/users" element={ <UsersPage/> }/>
-                            <Route path="/login" element={ <LoginContainer/> }/>
+                            <Route path="/login" element={ <Login/> }/>
                         </Routes>
                     </Suspense>
                 </div>

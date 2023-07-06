@@ -1,16 +1,29 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import loginFormSchema from '../formValidation/LoginFormSchema'
 import { useNavigate } from 'react-router-dom'
 import RoundedButton from '../common/buttons/rounded-btn/RoundedButton'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStateType } from '../../state/redux-store'
+import { login } from '../../state/auth-reducer'
 
-export default function Login( { login, isAuth, error, captchaUrl } ) {
+export default function Login() {
     const navigate = useNavigate()
     const initialValues = {
         email: '',
         password: '',
         rememberMe: false,
         captchaInput: ''
+    }
+
+    const captchaUrl = useSelector((state: AppStateType) => state.auth.captcha)
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+    const error = useSelector ((state: AppStateType) => state.auth.error)
+
+    const dispatch = useDispatch()
+
+    const logging = (email:string, password:string, rememberMe:boolean, captchaInput:string) => {
+        dispatch(login(email, password, rememberMe, captchaInput))
     }
 
     if ( isAuth ) {
@@ -34,7 +47,7 @@ export default function Login( { login, isAuth, error, captchaUrl } ) {
                         } }
                         onSubmit={ ( values ) => {
                             const { email, password, rememberMe, captchaInput } = values
-                            login( email, password, rememberMe, captchaInput )
+                            logging( email, password, rememberMe, captchaInput )
                         } }
                         validationSchema={ loginFormSchema }>
                     { () => (
