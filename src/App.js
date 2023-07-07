@@ -1,17 +1,17 @@
 import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import './App.css'
 import { Navbar } from './componenst/navbar/Navbar'
-import HeaderContainer from './componenst/header/HeaderContainer'
-import React, { Component, Suspense, lazy } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from './state/app-reducer'
 import Preloader from './componenst/common/Preloader'
 import UsersPage from './componenst/users/UsersPage'
 import Login from './componenst/login/Login'
+import { Header } from './componenst/header/Header'
 
 const ProfileContainer = lazy( () => import ('./componenst/profile/ProfileContainer') )
-const DialogsContainer = lazy( () => import ('./componenst/dialogs/DialogsContainer') )
+const DialogsPage = lazy( () => import ('./componenst/dialogs/DialogsPage') )
 
 class App extends Component {
 
@@ -34,14 +34,14 @@ class App extends Component {
         }
         return (
             <div className="app__wrapper">
-                <HeaderContainer/>
+                <Header/>
                 <Navbar/>
                 <div className="main__wrapper">
                     <Suspense fallback={ <Preloader/> }>
                         <Routes>
                             <Route exact path="/" element={ <ProfileContainer/> }/>
                             <Route path="/profile/:userId?" element={ <ProfileContainer/> }/>
-                            <Route path="/dialogs" element={ <DialogsContainer/> }/>
+                            <Route path="/dialogs" element={ <DialogsPage/> }/>
                             <Route path="/users" element={ <UsersPage/> }/>
                             <Route path="/login" element={ <Login/> }/>
                         </Routes>
