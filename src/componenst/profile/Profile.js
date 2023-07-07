@@ -2,11 +2,11 @@ import { ProfileInfo } from './profileInfo/ProfileInfo'
 import MyPostsContainer from './myposts/MyPostsContainer'
 import style from './Profile.module.css'
 
-export function Profile( { props, isOwner, savePhoto, saveProfileData } ) {
+export function Profile( { isOwner } ) {
     return (
         <div className={ style.profile__wrapper }>
-            <ProfileInfo updateStatus={ props.updateStatus } propsStatus={ props.status } propsProfile={ props.profile }
-                         isOwner={ isOwner } savePhoto={ savePhoto } saveProfileData={ saveProfileData }/>
+            <ProfileInfo
+                isOwner={ isOwner }/>
             <MyPostsContainer/>
         </div>
     )

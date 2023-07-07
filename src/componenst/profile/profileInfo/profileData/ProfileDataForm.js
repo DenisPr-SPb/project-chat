@@ -2,10 +2,17 @@ import RoundedButton from "../../../common/buttons/rounded-btn/RoundedButton";
 import {Field, Form, Formik} from "formik";
 import React from "react";
 import style from "./ProfileData.module.css";
+import { savePhoto } from '../../../../state/profile-reducer'
+import { useDispatch } from 'react-redux'
 
-export default function ProfileDataForm({profile, updateProfileData,savePhoto}) {
+export default function ProfileDataForm({profile, updateProfileData}) {
     function addNewProfileData(values) {
         updateProfileData(values)
+    }
+    const dispatch = useDispatch()
+
+    const savePhotoDispatch = () => {
+        dispatch(savePhoto())
     }
 
     const initialValues = profile
@@ -17,7 +24,7 @@ export default function ProfileDataForm({profile, updateProfileData,savePhoto}) 
 
     function onAvatarPhotoSelected(e) {
         if (e.target.files.length) {
-            savePhoto(e.target.files[0])
+            savePhotoDispatch(e.target.files[0])
         }
     }
 
