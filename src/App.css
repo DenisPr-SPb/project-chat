@@ -3,14 +3,14 @@ body{
     background-image:url("./assets/darkgrey-asphalt.jpg") ;
 }
 .app__wrapper{
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-areas:
     'header header'
     'nav profile';
-    grid-template-rows: 125px 1fr;
-    grid-template-columns:2fr 10fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns:1fr 11fr;
     grid-gap: 5px;
 }
 
@@ -28,6 +28,8 @@ body{
 /*NAVBAR*/
 
 .nav__wrapper{
+    min-width: 180px;
+    max-width: 200px;
     grid-area: nav;
     background: rgba(150, 150, 150, 0.5);
     border-radius: 5px;
