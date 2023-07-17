@@ -14,11 +14,7 @@ import {
     getFollowingInProgress
 } from '../../state/users-selector'
 
-// type UsersType = {
-//     requestUsers: ( currentP: number, sizeP: number, filter: FilterType ) => void
-// }
-
-export default function Users({}) {
+export default function Users() {
     const users = useSelector( getUsersList )
     const totalUsersCount = useSelector( getTotalUsersCount )
     const currentPage = useSelector( getCurrentPage )
@@ -26,30 +22,31 @@ export default function Users({}) {
     const filter = useSelector( getFilter )
     const followingInProgress = useSelector(getFollowingInProgress)
 
-    const diispatch = useDispatch()
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         //@ts-ignore
-        diispatch(requestUsers( currentPage, pageSize, filter ))
+        dispatch(requestUsers( currentPage, pageSize, filter ))
     }, [])
 
     const onPageChanged = ( pageNumber: number ) => {
         //@ts-ignore
-        diispatch( requestUsers( pageNumber, pageSize, filter ) )
+        dispatch( requestUsers( pageNumber, pageSize, filter ) )
     }
 
     const onFilterChanged = ( filter: FilterType ) => {
         //@ts-ignore
-        diispatch( requestUsers( 1, pageSize, filter ) )
+        dispatch( requestUsers( 1, pageSize, filter ) )
     }
 
     const foll = ( userId: number ) => {
         //@ts-ignore
-        diispatch(follow(userId))
+        dispatch(follow(userId))
     }
     const unfoll = ( userId: number ) => {
         //@ts-ignore
-        diispatch(unfollow(userId))
+        dispatch(unfollow(userId))
     }
     return (
         <div className={ style.users__wrapper }>
